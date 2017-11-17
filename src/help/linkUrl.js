@@ -1,0 +1,8 @@
+export const home = '/'
+export const customer = '/customer'
+export const customerPeople = '/customerPeople'
+export const createPeoTags = '/createPeoTags'
+export const templete = '/templete'
+export const userfee = '/userfee'
+export const setsms = '/setsms'
+export const plan = '/plan'
