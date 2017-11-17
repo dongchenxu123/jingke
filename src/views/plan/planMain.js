@@ -1,8 +1,22 @@
 import React from 'react'
 import '../../components/App.css'
 import PlanList from '../home/planList'
-
+import PlanData from './planData'
+import {Link} from 'react-router-dom'
+import {Select, Input, DatePicker, Button, Icon  } from 'antd'
+const { RangePicker } = DatePicker
+const Option = Select.Option;
+const Search = Input.Search
 class PlanMainview extends React.Component {
+    handleChange = (value) => {
+
+    }
+    planName = (value) => {
+
+    }
+    onChangeTime = (date, dateString) => {
+
+    }
     render () {
         console.log(this.props.data)
         return (
@@ -11,36 +25,35 @@ class PlanMainview extends React.Component {
                     <div className="panel-heading" style={{backgroundColor: '#fff', height: '50px'}}>
                         <h5 style={{lineHeight: '30px'}}>执行概况</h5>
                     </div>
-                    <div className="panel-body">
-                       <div className="col-md-4" style={{borderRight: '1px solid #dedede'}}>
-                            <p style={{padding: '20px 0', textAlign: 'center'}}>即将执行</p>
-                            <p style={{paddingBottom: '20px', textAlign: 'center'}}>
-                                <span style={{fontSize: '32px', color: '#f3a01c'}}>2</span>
-                                <span style={{fontSize: '30px'}}>个计划</span>
-                            </p>
-                        </div>
-                        <div className="col-md-4" style={{borderRight: '1px solid #dedede'}}>
-                            <p style={{padding: '20px 0', textAlign: 'center'}}>本周已执行</p>
-                            <p style={{paddingBottom: '20px', textAlign: 'center'}}>
-                                <span style={{fontSize: '32px', color: '#f3a01c'}}>2</span>
-                                <span style={{fontSize: '28px', paddingLeft: '5px'}}>个计划</span>
-                            </p>
-                        </div>
-                        <div className="col-md-4">
-                            <p style={{padding: '20px 0', textAlign: 'center'}}>本月已执行</p>
-                            <p style={{paddingBottom: '20px', textAlign: 'center'}}>
-                                <span style={{fontSize: '32px', color: '#f3a01c'}}>2</span>
-                                <span style={{fontSize: '30px'}}>个计划</span>
-                            </p>
-                        </div>
-                    </div>
+                    <PlanData />
                 </div>
                 <div className="panel panel-default">
-                    <div className="panel-heading" style={{backgroundColor: '#fff', height: '50px'}}>
+                    <div className="panel-heading" style={{backgroundColor: '#fff', height: '50px', overflow: 'hidden', display: 'flex'}}>
                         <h5 style={{lineHeight: '30px'}}>短信营销计划</h5>
+                        <Link to={'/dff'} style={{marginLeft: '15px'}}>
+                            <Button type='primary'>
+                                <Icon type="plus-circle" />
+                                <span style={{fontSize: '16px'}}>创建短信营销计划</span>
+                            </Button>
+                        </Link>
                     </div>
                     <div className="panel-body">
-                       
+                        <Select defaultValue="状态不限"
+                                style={{ width: 120 }}
+                                onChange={this.handleChange}
+                               > 
+                            <Option value="状态不限">状态不限</Option>
+                            <Option value="即将执行">即将执行</Option>
+                            <Option value="审核中" >审核中</Option>
+                            <Option value="未通过">未通过</Option>
+                            <Option value="已完成">已完成</Option>
+                        </Select>
+                        <Search
+                            placeholder="计划标题"
+                            onSearch={this.planName}
+                            style={{margin: '0px 10px', width: 200}}
+                        />
+                        <RangePicker onChange={this.onChangeTime} />
                     </div>
                 </div>
                 <PlanList />
