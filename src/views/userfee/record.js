@@ -1,5 +1,5 @@
 import React from 'react'
-import { DatePicker, Table } from 'antd'
+import { DatePicker, Table, Spin  } from 'antd'
 const { RangePicker } = DatePicker;
 const columns = [{
   title: 'Name',
@@ -45,15 +45,40 @@ const data = [{
   age: 32,
   address: 'Sidney No. 1 Lake Park',
 }];
+const style={
+  spin: {
+    textAlign: 'center',
+    marginBottom: '20px',
+    padding:'30px 50px',
+    margin: '20px 0'
+  }
+}
 class RecordView extends React.Component {
     onChange = (date, dateString) => {
         console.log(date, dateString);
     }
+    renderTable = () => {
+       const data = this.props.data
+       if (data.length > 0) {
+          return (
+            <Table columns={columns} dataSource={data} rowKey={record => record.key}/>
+          )
+       } else {
+         return (
+           <div style={{width: '200px', margin: '20px auto'}}>暂无数据</div>
+         )
+       }
+    }
     render () {
+        const loading = this.props.loading
         return (
             <div>
                 <RangePicker onChange={this.onChange} style={{marginBottom: '20px'}}/>
-                <Table columns={columns} dataSource={data} rowKey={record => record.key}/>
+                {
+                  loading
+                  ? <div style={style.spin}><Spin spinning={loading}/></div>
+                  : this.renderTable()
+                }
             </div>
         )
     }

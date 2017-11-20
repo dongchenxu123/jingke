@@ -1,60 +1,81 @@
 import React from 'react'
-import { Table } from 'antd'
+import { Table, Spin, Icon, Tooltip } from 'antd'
+const style={
+  spin: {
+    textAlign: 'center',
+    marginBottom: '20px',
+    padding:'30px 50px',
+    margin: '20px 0'
+  }
+}
+const text = <span>在用户历史下单客单价基础上，对用户消费可承受范围的综合评估活跃度</span>
+const hyText = <span>近60天用户下单次数</span>
 const columns = [{
   title: '用户',
-  dataIndex: 'name',
-  key: 'name',
-  render: text => <a href="#">{text}</a>,
+  dataIndex: 'fullname',
+  key: 'fullname'
 }, {
-  title: '购买力',
-  dataIndex: 'age',
-  key: 'age',
+  title: 
+      <div>
+        <span>购买力</span>&nbsp;&nbsp;
+        <Tooltip placement="bottom" title={text}>
+          <Icon type="question-circle-o" />
+        </Tooltip>
+      </div>
+  ,
+  dataIndex: 'order_price',
+  key: 'order_price'
+  
 }, {
-  title: '活跃度',
-  dataIndex: 'address',
-  key: 'address',
+  title:
+      <div>
+        <span>活跃度</span>&nbsp;&nbsp;
+        <Tooltip placement="bottom" title={hyText}>
+          <Icon type="question-circle-o" />
+        </Tooltip>
+      </div>
+  ,
+  dataIndex: 'order_cnt',
+  key: 'order_cnt',
 }, {
   title: '性别',
   key: 'action',
   render: (text, record) => (
     <span>
-      <a href="#">Action 一 {record.name}</a>
-      <span className="ant-divider" />
-      <a href="#">Delete</a>
-      <span className="ant-divider" />
-      <a href="#" className="ant-dropdown-link">
-        More actions
-      </a>
+       {record.gendar=== "2" ? '女' : '男'}
     </span>
   ),
 }, {
   title: '地域',
-  dataIndex: 'source',
-  key: 'source',
+  dataIndex: 'province',
+  key: 'province',
 }];
-const data = [{
-  key: '1',
-  name: 'John Brown',
-  age: 32,
-  address: 'New York No. 1 Lake Park',
-  source: 'pc'
-}, {
-  key: '2',
-  name: 'Jim Green',
-  age: 42,
-  address: 'London No. 1 Lake Park',
-  source: 'mb'
-}, {
-  key: '3',
-  name: 'Joe Black',
-  age: 32,
-  address: 'Sidney No. 1 Lake Park',
-  source: 'pc'
-}];
+
+
 class CustomerTable extends React.Component {
-    render () {
+    renderTable = () => {
+      const customerData = this.props.customerData
+      if (customerData.length > 0) {
         return (
-            <Table columns={columns} dataSource={data} rowKey={record => record.key}/>
+          <Table columns={columns} dataSource={customerData} rowKey={record => record.jd_user_id}/>
+        )
+      } else {
+        return (
+          <div style={{width: '200px', margin: '20px auto'}}>暂无数据</div>
+        )
+      }
+    }
+    render () {
+        const customerData = this.props.customerData
+        const loading = this.props.loading
+        return (
+            <div>
+              {
+                loading
+                ? <div style={style.spin}><Spin spinning={loading}/></div>
+                : this.renderTable()
+              }
+            </div>
         )
     }
 }

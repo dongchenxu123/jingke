@@ -5,8 +5,12 @@ class PreView extends React.Component {
   render () {
     let menus = this.props.menus
     let serviceMenu = []
+    let zhidaMenu = null
     if (menus != null) {
-         if (menus.menuName1 && menus.menuUrl1) {
+        if (menus.zhidaName && menus.zhidaUrl) {
+            zhidaMenu = {name: menus.zhidaName, url: menus.zhidaUrl}
+        }
+        if (menus.menuName1 && menus.menuUrl1) {
             serviceMenu.push({name: menus.menuName1, url: menus.menuUrl1})
         }
         if (menus.menuName2 && menus.menuUrl2) {
@@ -16,8 +20,6 @@ class PreView extends React.Component {
             serviceMenu.push({name: menus.menuName3, url: menus.menuUrl3})
         }
     }
-   console.log(serviceMenu)
-   
     return (
      <div>
       <div style={{width: '100%', height: '50px', background: '#5a76d5', lineHeight: '50px', fontSize: '20px', textAlign: 'center', color: '#fff'}}>
@@ -31,8 +33,8 @@ class PreView extends React.Component {
           </span>
           <div className='custom-card'>
             {
-              menus && menus.zhidaName && menus.zhidaUrl
-              ? <a href={menus.zhidaUrl} target='_blank' style={{float: 'right'}}>{menus.zhidaName}&lt;&lt;</a>
+              zhidaMenu !== null
+              ? <a href={zhidaMenu.url} target='_blank' style={{float: 'right'}}>{zhidaMenu.name}&lt;&lt;</a>
               : null
             }
           </div>

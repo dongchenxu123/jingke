@@ -4,6 +4,7 @@ import PlanList from '../home/planList'
 import PlanData from './planData'
 import {Link} from 'react-router-dom'
 import {Select, Input, DatePicker, Button, Icon  } from 'antd'
+import {createSms} from '../../help/linkUrl'
 const { RangePicker } = DatePicker
 const Option = Select.Option;
 const Search = Input.Search
@@ -30,7 +31,7 @@ class PlanMainview extends React.Component {
                 <div className="panel panel-default">
                     <div className="panel-heading" style={{backgroundColor: '#fff', height: '50px', overflow: 'hidden', display: 'flex'}}>
                         <h5 style={{lineHeight: '30px'}}>短信营销计划</h5>
-                        <Link to={'/dff'} style={{marginLeft: '15px'}}>
+                        <Link to={createSms} style={{marginLeft: '15px'}}>
                             <Button type='primary'>
                                 <Icon type="plus-circle" />
                                 <span style={{fontSize: '16px'}}>创建短信营销计划</span>

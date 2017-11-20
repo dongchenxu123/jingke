@@ -1,5 +1,5 @@
 import React from 'react'
-import { Collapse, Radio, Checkbox, Button } from 'antd'
+import { Collapse, Radio, Checkbox, Button, message } from 'antd'
 import request from '../../util/request'
 import PeopleModal from './peopleModal'
 import CustomerTable from './customerTable'
@@ -7,40 +7,64 @@ const RadioGroup = Radio.Group;
 const CheckboxGroup = Checkbox.Group;
 const Panel = Collapse.Panel
 
-const reqObj = {
-    recharge: `customer?do=get-cond-list`
+const Obj = {
+    condList: `customer?do=get-cond-list`,
+    searchList: `customer?do=get-customers`,
+    addTag: `customer?do=add-tag`
+
 }
-function userRecharge(){
+function condList(){
     let option={
-        url: reqObj.recharge
+        url: Obj.condList
     }
     return request(option)
 }
-console.log(userRecharge())
 
+function searchList (data) {
+    let  option={
+        url: Obj.searchList,
+        method: 'post',
+        data: {
+            conds: JSON.stringify(data)
+        }
+    }
+    return request(option)
+}
+function addTag (data) {
+    let  option={
+        url: Obj.addTag,
+        method: 'post',
+        data: {
+            data: JSON.stringify(data)
+        }
+    }
+    return request(option)
+}
 class CustomerList extends React.Component {
     constructor () {
         super()
         this.state ={
-           age: {},
+        //    age: {},
            gender: {},
            cate: {},
            location: {},
            order: {},
            price: {},
            orderValue: '',
-           ageValue: [],
+        //    ageValue: [],
            locationValue: [],
            priceValue: [],
            cateValue: [],
            genderValue: [],
-           peopoleModal: false
+           peopoleModal: false,
+           customerData: [],
+           loading: false
         }
     }
     componentDidMount () {
-       userRecharge().then(data => {
+       condList().then(data => {
             this.setState({
-                age: data.age || {},
+                // age: data.age || {},
                 gender: data.gender || {},
                 cate: data.cate || {},
                 location: data.location || {},
@@ -55,11 +79,11 @@ class CustomerList extends React.Component {
          orderValue: e.target.value
         });
     }
-    onChangeChart = (checkedValues) => {
-       this.setState({
-         ageValue: checkedValues
-        });
-    }
+    // onChangeChart = (checkedValues) => {
+    //    this.setState({
+    //      ageValue: checkedValues
+    //     });
+    // }
     onChangeLocation = (checkedValues) => {
         this.setState({
             locationValue: checkedValues
@@ -86,14 +110,14 @@ class CustomerList extends React.Component {
     }
     
     saveData = () => {
-        const {orderValue, ageValue, locationValue, priceValue, cateValue, genderValue} = this.state
+        const {orderValue, locationValue, priceValue, cateValue, genderValue} = this.state
         let selectOrder = []
         if (orderValue != '') {
              selectOrder.push(orderValue)
         }
         let data={
             order: selectOrder,
-            age: ageValue,
+            // age: ageValue,
             location: locationValue,
             price: priceValue,
             cate: cateValue,
@@ -101,9 +125,18 @@ class CustomerList extends React.Component {
         }
         return data
     }
-    submit = () => {
+    submitOnsearch = () => {
         const data = this.saveData()
-        console.log(data)
+        this.setState({
+            loading: true
+        })
+        searchList(data).then(res =>{
+            console.log(res)
+            this.setState({
+                customerData: res.data,
+                loading: false
+            })
+        })
     }
     createPeople = () => {
         this.setState({
@@ -113,7 +146,20 @@ class CustomerList extends React.Component {
     savePeople = (values) => {
         const data = this.saveData()
         const peopleName = values.peopleName
-        console.log(values)
+        const itemData ={
+            conds: data,
+            name: peopleName
+        }
+        const _this = this
+        addTag (itemData).then(res =>{
+            console.log(res)
+            if (res === 'OK') {
+                message.success('创建成功！')
+                _this.setState({
+                    peopoleModal: false
+                })
+            }
+        })
     }
     handleCancel = () => {
         this.setState({
@@ -121,7 +167,7 @@ class CustomerList extends React.Component {
         })
     }
     render () {
-        const {order, age, location, price, cate, gender} = this.state
+        const {order, location, price, cate, gender} = this.state
         return (
             <div>
                 <div className="panel panel-default" style={{marginBottom: '20px'}}>
@@ -164,13 +210,13 @@ class CustomerList extends React.Component {
                                         : null
                                     }
                                 </Panel>
-                                <Panel header='年龄' key="5">
+                                {/* <Panel header='年龄' key="5">
                                     {
                                         age.values && age.values.length > 0
                                         ? <CheckboxGroup options={age.values} onChange={this.onChangeChart} />
                                         : null
                                     }
-                                </Panel>
+                                </Panel> */}
                                 <Panel header='性别' key="6">
                                     {
                                         gender.values && gender.values.length > 0
@@ -181,7 +227,7 @@ class CustomerList extends React.Component {
                         </Collapse>
                         <div style={{width: '300px', margin: '20px auto'}}>
                             <div>
-                                <Button type="primary" onClick={this.submit} icon="search">搜索</Button>
+                                <Button type="primary" onClick={this.submitOnsearch} icon="search">搜索</Button>
                                 <Button type="primary" onClick={this.createPeople} style={{marginLeft: '10px'}}>保存搜索条件为客户人群</Button>
                             </div>
                         </div>
@@ -193,7 +239,7 @@ class CustomerList extends React.Component {
                 </div>
                 <div className="panel panel-default">
                     <div className="panel-body">
-                        <CustomerTable />
+                        <CustomerTable customerData={this.state.customerData} loading={this.state.loading}/>
                     </div>
                 </div>
             </div>

@@ -18,7 +18,7 @@ class FormTxtView extends React.Component {
         };
         const props = {
             name: 'file',
-            action: '//jsonplaceholder.typicode.com/posts/',
+            action: '/customer?do=upload',
             headers: {
                 authorization: 'authorization-text',
             },
