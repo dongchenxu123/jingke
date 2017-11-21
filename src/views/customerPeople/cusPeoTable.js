@@ -64,10 +64,13 @@ class CusPeoTable extends React.Component {
           key: 'action',
           render: (text, record) => {
             const conds_desc = record.conds_desc
+            const conds = record.conds
             return (
               <div style={{width: '200px'}}>
                 {
-                  this.renderConds(conds_desc)
+                  conds === ""
+                  ? <span>文件上传，共上传了 {record.customer_cnt} 条</span>
+                  : this.renderConds(conds_desc)
                 }
               </div>
             )
@@ -80,7 +83,7 @@ class CusPeoTable extends React.Component {
           title: '操作',
           key: 'caozuo',
           render: (text, record) => (
-              <Popconfirm title="Are you sure delete this task?" onConfirm={this.delTagitem.bind(this, record.id)}>
+              <Popconfirm title="您确定删除这个人群吗?" onConfirm={this.delTagitem.bind(this, record.id)}>
                 <Button>删除</Button>
               </Popconfirm>
           )

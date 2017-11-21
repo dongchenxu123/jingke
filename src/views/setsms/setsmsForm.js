@@ -1,8 +1,13 @@
 import React from 'react'
-import {Form, Icon, Input, Button, Modal, Upload} from 'antd'
+import {Form, Icon, Input, Button, Modal, Upload, message} from 'antd'
 import './upload.css'
 const FormItem = Form.Item;
 let Timer = null
+function getBase64(img, callback) {
+  const reader = new FileReader();
+  reader.addEventListener('load', () => callback(reader.result));
+  reader.readAsDataURL(img);
+}
 class SetsmsForm extends React.Component {
     constructor () {
         super()
@@ -15,6 +20,11 @@ class SetsmsForm extends React.Component {
     e.preventDefault()
     const self = this
     const values = this.props.form.getFieldsValue()
+    if (values) {
+        if (values.tel) {
+            this.props.getCodenum(values.tel)
+        }
+    }
     if (!values.tel) {
       Modal.error({
         title: '提示',
@@ -49,12 +59,22 @@ class SetsmsForm extends React.Component {
   }
     handleSubmit = (e) => {
         e.preventDefault();
+        const _this = this
         this.props.form.validateFields((err, values) => {
         if (!err) {
-            console.log('Received values of form: ', values);
-        }
+            _this.props.hanelSubmit(values)
+         }
         });
     }
+    handleChange = (info) => {
+    if (info.file.status === 'done') {
+      // Get this url from response in real world.
+       message.success(`${info.file.name} 文件上传成功！`);
+      getBase64(info.file.originFileObj, imageUrl => this.setState({ imageUrl }));
+    } else if (info.file.status === 'error') {
+        message.error(`${info.file.name} 文件上传失败.`);
+    }
+  }
     render () {
         const { getFieldDecorator, getFieldsValue } = this.props.form;
         const formItemLayout = {
@@ -65,6 +85,8 @@ class SetsmsForm extends React.Component {
         // if (values) {
         //     const imageUrl = 
         // }
+        const {telephone, sms_sign, company_license} = this.props
+        const imageUrl = this.state.imageUrl
         return (
             <Form onSubmit={this.handleSubmit}>
                 <FormItem
@@ -73,6 +95,7 @@ class SetsmsForm extends React.Component {
                     >
                     {getFieldDecorator('sign', {
                         rules: [{ required: true, message: '短信签名不能超过10个字符!', max: 10 }],
+                        initialValue: sms_sign
                     })(
                         <Input />
                     )}
@@ -83,15 +106,20 @@ class SetsmsForm extends React.Component {
                     >
                     {getFieldDecorator('zhizhao', {
                         rules: [{ required: true, message: '请上传营业执照!'}],
+                        initialValue: company_license
                     })(
                          <Upload
                             className="avatar-uploader"
-                            name="avatar"
+                            name="file"
                             showUploadList={false}
-                            action="//jsonplaceholder.typicode.com/posts/"
+                            action="/user?do=upload"
+                            onChange={this.handleChange}
                         >
-                           
-                                <Icon type="plus" className="avatar-uploader-trigger" />
+                               {
+                                   imageUrl || company_license
+                                   ? <img src={imageUrl ? imageUrl : company_license} alt="" className="avatar" />
+                                   : <Icon type="plus" className="avatar-uploader-trigger" />
+                               } 
                         </Upload>
                     )}
                 </FormItem>
@@ -101,8 +129,9 @@ class SetsmsForm extends React.Component {
                     >
                     {getFieldDecorator('tel', {
                         rules: [{ required: true, message: '请填写手机号！' }],
+                        initialValue: telephone
                     })(
-                        <Input />
+                        <Input disabled={telephone ? true : false}/>
                     )}
                 </FormItem>
                 <FormItem

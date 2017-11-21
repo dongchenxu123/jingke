@@ -6,7 +6,10 @@ class SetSmsview extends React.Component {
         return (
              <div className="setsms">
                 <div className="panel-heading" style={{backgroundColor: '#fff', marginBottom: '20px', height: '50px'}}>
-                    <h5 style={{lineHeight: '30px', fontSize: '14px'}}>短信资质</h5>
+                    <h5 style={{lineHeight: '30px'}}>
+                        <span style={{fontSize: '14px'}}>短信资质</span>
+                        <span style={{paddingLeft: '20px', color: '#333'}}>如有疑问请联系客服!</span>
+                    </h5>
                 </div>
                 <SetsmsMain />
             </div>

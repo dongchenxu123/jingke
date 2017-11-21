@@ -1,10 +1,43 @@
 import React from 'react'
-import { Alert, Tabs } from 'antd'
+import { Alert, Tabs, message } from 'antd'
 import CustomerList from '../customer/customerList'
 import FormTxtView from './formTxt'
+import request from '../../util/request'
 const TabPane = Tabs.TabPane;
 import '../../components/App.css'
+const Obj = {
+    createTag: `customer?do=add-tag`
+}
+
+function addTag (values) {
+    let dataVal = {}
+    if (values) {
+        dataVal = {
+            name: values.name,
+            telephone_file: values.upload.file.response.res.url,
+            total_cnt: values.upload.file.response.res.total
+        }
+    }
+    let option={
+        url: Obj.createTag,
+        method: 'post',
+        data: {
+            data: JSON.stringify(dataVal)
+        }
+    }
+    return request(option)
+}
 class CreatePeoTags extends React.Component {
+    onSubmit = (values) => {
+      addTag(values).then(data => {
+        console.log(data)
+        if (data !== null) {
+            message.success(`创建成功！`)
+        } else {
+            message.error(`上传文件内容为空或者格式不正确`)
+        }
+      })
+    }
     render () {
         return (
             <div className='peopleTags'>
@@ -18,7 +51,7 @@ class CreatePeoTags extends React.Component {
                                 <CustomerList />
                             </TabPane>
                             <TabPane tab="通过文本导入" key="2">
-                                <FormTxtView />
+                                <FormTxtView onSubmitTxt={this.onSubmit}/>
                             </TabPane>
                         </Tabs>
                     </div>

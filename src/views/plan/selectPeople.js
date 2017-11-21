@@ -5,6 +5,7 @@ import StepView from './step'
 import PeopleTable from './peopleList'
 class SelectPeople extends React.Component {
     render () {
+        console.log(this.props.data)
         return (
             <div className="selectpeople">
                 <PlanTitleView/>

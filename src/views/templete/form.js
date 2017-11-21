@@ -38,11 +38,13 @@ class TempFormView extends React.Component {
                 const menus= data.user.sms_menu.menu
                 let zhidaMenu = []
                 let serviceMenu = []
-                for (var j = 0; j < menus.length; j++) {
-                    if (menus[j].type === 1) {
-                        serviceMenu.push(menus[j])
-                    } else {
-                        zhidaMenu.push(menus[j])
+                if (menus !== null) {
+                    for (var j = 0; j < menus.length; j++) {
+                        if (menus[j].type === 1) {
+                            serviceMenu.push(menus[j])
+                        } else {
+                            zhidaMenu.push(menus[j])
+                        }
                     }
                 }
                 if (zhidaMenu.length > 0) {

@@ -1,5 +1,5 @@
 import axios from 'axios'
-
+import {message} from 'antd'
 
 const baseXbUrl = 'http://jingke.steven.xibao100.com/';
 const devBaseUrl = '/api/';
@@ -37,6 +37,7 @@ export default function req(reqData) {
                 }
                 if (res.code) {
                     // reject({msg: res.msg});
+                    message.error(res.msg)
                     reject(res.msg)
                     return;
                 }
