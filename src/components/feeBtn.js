@@ -10,7 +10,6 @@ function userRecharge(){
     }
     return request(option)
 }
-console.log(userRecharge())
 class FeebtnView extends React.Component {
     linktoRecharge = () => {
         userRecharge().then(data => {
@@ -21,7 +20,7 @@ class FeebtnView extends React.Component {
     }
     render () {
         return (
-            <Button style={{backgroundColor: '#f3a01c', color: '#fff', border: '1px solid #f3a01c', width: '150px'}}
+            <Button style={{backgroundColor: '#6acea5', color: '#fff', border: '1px solid #6acea5', width: '150px'}}
                     size='large'
                     onClick={this.linktoRecharge}>
                     立即充值

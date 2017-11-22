@@ -1,12 +1,16 @@
 import React from 'react'
 import { Table, Icon, Popover, Button, Spin, Popconfirm } from 'antd'
 import {FormateNum} from '../../help/formate'
-const content = (
-  <div>
-    <p>Content</p>
-    <p>Content</p>
-  </div>
-);
+import {Link} from 'react-router-dom'
+const status = {
+  10: '审核中',
+  12: '未通过',
+  20: '即将执行',
+  21: '已完成',
+  22: '发送失败',
+  23: '已取消',
+  24: '发送中'
+}
 const style={
   spin: {
     textAlign: 'center',
@@ -49,10 +53,14 @@ class PlanListView extends React.Component {
           key: 'action',
           render: (text, record) => (
             <div>
-                <span>未通过</span>&nbsp;&nbsp;
-                <Popover placement="bottom" content={content} trigger="hover">
-                    <Icon type="question-circle-o" />
-                </Popover>
+                <span>{status[record.task_status]}</span>&nbsp;&nbsp;
+                {
+                  record.refuse_reason
+                  ? <Popover placement="bottom" content={record.refuse_reason} trigger="hover">
+                        <Icon type="question-circle-o" />
+                    </Popover>
+                  : null
+                }
             </div>
             )
         }, {
@@ -80,7 +88,7 @@ class PlanListView extends React.Component {
           key: 'caozuo',
           render: (text, record) => (
               <div style={{display: 'flex'}}>
-                <Button>查看详情</Button>
+                <Link to={'/planDetail/'+ record.id}><Button>查看详情</Button></Link>
                 <Popconfirm title="您确定取消这个计划吗?" onConfirm={this.confirm.bind(this, record.id)}>
                   <Button>取消计划</Button>
                 </Popconfirm>

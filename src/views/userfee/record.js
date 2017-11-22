@@ -1,50 +1,7 @@
 import React from 'react'
 import { DatePicker, Table, Spin  } from 'antd'
+import {FormateNum} from '../../help/formate'
 const { RangePicker } = DatePicker;
-const columns = [{
-  title: 'Name',
-  dataIndex: 'name',
-  key: 'name',
-  render: text => <a href="#">{text}</a>,
-}, {
-  title: 'Age',
-  dataIndex: 'age',
-  key: 'age',
-}, {
-  title: 'Address',
-  dataIndex: 'address',
-  key: 'address',
-}, {
-  title: 'Action',
-  key: 'action',
-  render: (text, record) => (
-    <span>
-      <a href="#">Action 一 {record.name}</a>
-      <span className="ant-divider" />
-      <a href="#">Delete</a>
-      <span className="ant-divider" />
-      <a href="#" className="ant-dropdown-link">
-        More actions
-      </a>
-    </span>
-  ),
-}];
-const data = [{
-  key: '1',
-  name: 'John Brown',
-  age: 32,
-  address: 'New York No. 1 Lake Park',
-}, {
-  key: '2',
-  name: 'Jim Green',
-  age: 42,
-  address: 'London No. 1 Lake Park',
-}, {
-  key: '3',
-  name: 'Joe Black',
-  age: 32,
-  address: 'Sidney No. 1 Lake Park',
-}];
 const style={
   spin: {
     textAlign: 'center',
@@ -57,11 +14,11 @@ class RecordView extends React.Component {
     onChange = (date, dateString) => {
         console.log(date, dateString);
     }
-    renderTable = () => {
+    renderTable = (columns) => {
        const data = this.props.data
        if (data.length > 0) {
           return (
-            <Table columns={columns} dataSource={data} rowKey={record => record.key}/>
+            <Table columns={columns} dataSource={data} rowKey={record => record.id}/>
           )
        } else {
          return (
@@ -70,14 +27,44 @@ class RecordView extends React.Component {
        }
     }
     render () {
-        const loading = this.props.loading
+        const {loading} = this.props
+        const columns = [{
+            title: '时间',
+            key: 1,
+            render: (text, record) => (
+              <span>{record.created ? record.created : record.gmt_payment}</span>
+            )
+          }, {
+            title: '方向',
+            dataIndex: 'type',
+            key: 2,
+          }, {
+            title: '余额变动',
+            key: 3,
+            render: (text, record) => (
+              <div>
+                 {record.sms_price
+                  ? <span>- {FormateNum(record.sms_price)}</span>
+                  : <span>+ {FormateNum(record.total_fee)}</span>
+                 }
+              </div>
+            )
+          }, {
+            title: '描述',
+            key: 4,
+            render: (text, record) => (
+              <span>
+                {record.remarks ? record.remarks : record.plan_name}
+              </span>
+            ),
+          }];
         return (
             <div>
                 <RangePicker onChange={this.onChange} style={{marginBottom: '20px'}}/>
                 {
                   loading
                   ? <div style={style.spin}><Spin spinning={loading}/></div>
-                  : this.renderTable()
+                  : this.renderTable(columns)
                 }
             </div>
         )

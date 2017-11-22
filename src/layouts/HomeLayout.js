@@ -27,13 +27,16 @@ class HomeLayout extends React.Component {
 		this.state={
 			data: [],
 			user: null,
-			smsData: {}
+			smsData: null,
+			seltotal: 0,
+			sms_balance: 0
 		}
 	}
 	componentDidMount () {
 		getuserInfo ().then(data => {
 			this.setState({
-				user: data.user
+				user: data.user,
+				sms_balance: data.user.sms_balance
 			})
 		})
 	}
@@ -43,7 +46,11 @@ class HomeLayout extends React.Component {
 				smsData: data.value
 			})
 		}
-		
+		if (data.step === 2) {
+			this.setState({
+				seltotal: data.seltotal
+			})
+		}
 	}
 	render() {
 		const {routes, location} = this.props;
@@ -60,7 +67,7 @@ class HomeLayout extends React.Component {
 		return (
 			<div className='home' style={{marginTop: '20px'}}>
 				<div className='container' style={{ display: 'flex' }}>
-					<SideNav pathName={pathName}/>
+					<SideNav pathName={pathName} sms_balance={this.state.sms_balance}/>
 					{routes.map((route, i) => (
                         <RouteWithSubRoutes key={i} {...route}/>
                     ))}	

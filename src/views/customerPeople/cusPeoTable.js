@@ -69,7 +69,7 @@ class CusPeoTable extends React.Component {
               <div style={{width: '200px'}}>
                 {
                   conds === ""
-                  ? <span>文件上传，共上传了 {record.customer_cnt} 条</span>
+                  ? <span>文件上传</span>
                   : this.renderConds(conds_desc)
                 }
               </div>

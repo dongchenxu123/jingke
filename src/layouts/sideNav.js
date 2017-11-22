@@ -25,14 +25,14 @@ class SideNav extends React.Component {
 		if (name === '/userfee' || name === '/setsms') {
 			defaultValue = ['sub5']
 		}
-		return (
+		const sms_balance = this.props.sms_balance
+        return (
 			<div style={{ display: 'flex' }}>
 						<div>
 						<div style={{padding: '40px 10px 20px 10px', backgroundColor: '#fff', marginBottom: '8px'}}>
-							<p style={{paddingBottom: '15px'}}>账户余额（元）</p>
+							<p style={{paddingBottom: '15px'}}>短信余额 (条)</p>
 							<p style={{paddingBottom: '20px'}}>
-								<span>￥</span>
-								<span style={{fontSize: '32px'}}>{FormateNum(5000)}</span>
+								<span style={{fontSize: '32px'}}>{FormateNum(sms_balance)}</span>
 							</p>
 							<FeebtnView />
 						</div>

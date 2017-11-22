@@ -10,9 +10,15 @@ const Obj = {
     tasksList: `market?do=get-tasks`,
     cancelPlan: `market?do=cancel-task`
  }
-function tasksList () {
-   let option={
+function tasksList (task_status, planName, start_date, end_date) {
+    let option={
         url: Obj.tasksList,
+        params: {
+          task_status: task_status,
+          q: planName,
+          start_date: start_date,
+          end_date: end_date
+       }
     }
     return request(option)
 }
@@ -38,7 +44,11 @@ class PlanMainview extends React.Component {
         curr_month_cnt: 0,
         curr_week_cnt: 0,
         waiting_cnt: 0,
-        loading: true
+        loading: true,
+        task_status: 0,
+        planName: '',
+        start_date: '',
+        end_date: ''
       }
     }
     componentDidMount () {
@@ -62,13 +72,44 @@ class PlanMainview extends React.Component {
      })
     }
     handleChange = (value) => {
-
+        const _this = this
+        this.setState({
+            task_status: value
+        })
+        const {planName,start_date, end_date} = this.state
+        tasksList (value, planName, start_date, end_date).then(data => {
+            _this.setState({
+                tasksList: data.data
+            })
+        })
     }
     planName = (value) => {
-
+        this.setState({
+            planName: value
+        })
+        const _this = this
+        const { task_status , start_date, end_date} = this.state
+        tasksList (task_status, value, start_date, end_date).then(data => {
+            _this.setState({
+                tasksList: data.data
+            })
+        })
     }
     onChangeTime = (date, dateString) => {
-
+      console.log(date, dateString)
+      const _this = this
+      const {planName, task_status} = this.state
+      if (dateString.length > 0) {
+         this.setState({
+             start_date: dateString[0],
+             end_date: dateString[1]
+         })
+         tasksList (task_status, planName,dateString[0],dateString[1]).then(data => {
+            _this.setState({
+                tasksList: data.data
+            })
+        })
+      }
     }
     render () {
         const {curr_month_cnt, curr_week_cnt, waiting_cnt} = this.state
@@ -97,11 +138,14 @@ class PlanMainview extends React.Component {
                                 style={{ width: 120 }}
                                 onChange={this.handleChange}
                                > 
-                            <Option value="状态不限">状态不限</Option>
-                            <Option value="即将执行">即将执行</Option>
-                            <Option value="审核中" >审核中</Option>
-                            <Option value="未通过">未通过</Option>
-                            <Option value="已完成">已完成</Option>
+                            <Option value="0">状态不限</Option>
+                            <Option value="10" >审核中</Option>
+                            <Option value="12">未通过</Option>
+                            <Option value="20">即将执行</Option>
+                            <Option value="21">已完成</Option>
+                            <Option value="22">发送失败</Option>
+                            <Option value="23">已取消</Option>
+                            <Option value="24">发送中</Option>
                         </Select>
                         <Search
                             placeholder="计划标题"

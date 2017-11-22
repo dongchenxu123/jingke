@@ -1,5 +1,5 @@
 .App, .customer, .customerPeople, .peopleTags, .templete, .userfee, .setsms, .plan, .createSms, .selectpeople,
-.finish {
+.finish, .detail {
   width: 100%;
   margin-left: 10px
 }

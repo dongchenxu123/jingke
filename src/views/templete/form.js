@@ -70,7 +70,7 @@ class TempFormView extends React.Component {
         this.props.form.validateFields((err, values) => {
         if (!err) {
             _this.props.submitMenu(values)
-        }
+         }
         });
     }
     render () {
@@ -203,7 +203,7 @@ class TempFormView extends React.Component {
                             )}
                         </FormItem>
                         <FormItem
-                            wrapperCol={{ span: 12, offset: 6 }}
+                            wrapperCol={{ span: 15, offset: 6 }}
                             >
                             <Button type="primary" htmlType="submit">保存</Button>
                             

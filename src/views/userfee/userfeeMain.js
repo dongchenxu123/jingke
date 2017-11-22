@@ -31,14 +31,12 @@ class UserfeeMain extends React.Component {
     }
     componentDidMount () {
         userTrades().then(data => {
-            console.log(data)
             this.setState({
                 trades: data.data,
                 loading: false
             })
         })
         userCost().then(data => {
-            console.log(data)
             this.setState({
                 cost: data.data,
                 loading: false

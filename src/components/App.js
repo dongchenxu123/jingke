@@ -7,7 +7,8 @@ import PlanListView from '../views/home/planList'
 import request from '../util/request'
 const Obj = {
     tasksList: `market?do=get-tasks&skip=0&limit=10`,
-    cancelPlan: `market?do=cancel-task`
+    cancelPlan: `market?do=cancel-task`,
+    getStats:  `market?do=get-stats`
  }
 function tasksList () {
    let option={
@@ -25,12 +26,21 @@ function cancelPlan (id) {
     }
   return request(option)
 }
+function getStats () {
+  let option={
+        url: Obj.getStats,
+    }
+    return request(option)
+}
 class App extends Component {
   constructor () {
     super()
     this.state={
       tasksList: [],
-      loading: true
+      loading: true,
+      curr_month: {},
+      last_month: {},
+      today: {}
     }
   }
   componentDidMount () {
@@ -38,6 +48,14 @@ class App extends Component {
       this.setState({
         tasksList: data.data,
         loading: false
+      })
+    })
+    getStats().then(data => {
+      console.log(data)
+      this.setState({
+        curr_month: data.curr_month,
+        last_month: data.last_month,
+        today: data.today
       })
     })
   }
@@ -51,9 +69,12 @@ class App extends Component {
      })
   }
   render() {
+    const {curr_month, last_month, today} = this.state
     return (
       <div className="App">
-        <DateView />
+        <DateView curr_month={curr_month}
+                  last_month={last_month}
+                  today={today}/>
         <PlanListView tasksList={this.state.tasksList}
                       loading={this.state.loading}
                       handelCancel={this.handelCancel}/>
@@ -62,4 +83,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default App

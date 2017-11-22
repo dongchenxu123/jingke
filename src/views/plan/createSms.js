@@ -5,15 +5,12 @@ import StepView from './step'
 import FormView from './form'
 import {formatDateTime} from '../../help/formate'
 class CreateSms extends React.Component {
-    SubmitForm = (values, saveData) => {
-        console.log(values, saveData)
+    SubmitForm = (values) => {
+        console.log(values)
         const data = {
             plan_name: values.planTitle,
             send_time: formatDateTime(new Date(values.sendTime)),
-            template: values.sms,
-            sign: saveData.sign,
-            sign_id: saveData.sign_id,
-            menu: saveData.menu
+            template: values.sms
         }
         this.props.commData({step:1, value: data})
     }

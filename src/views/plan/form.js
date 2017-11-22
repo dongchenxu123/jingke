@@ -7,13 +7,13 @@ const history = createHistory()
 const FormItem = Form.Item
 const { TextArea } = Input
 class FormView extends React.Component {
-    handleSubmit = (saveData, e) => {
+    handleSubmit = (e) => {
         e.preventDefault();
         const _this = this
         this.props.form.validateFields((err, values) => {
         if (!err) {
             console.log('Received values of form: ', values);
-            _this.props.SubmitForm(values, saveData)
+            _this.props.SubmitForm(values)
             history.push(SelectPeople)
         }
         });
@@ -38,30 +38,19 @@ class FormView extends React.Component {
         const user = this.props.user
         let fontNum = 70
         const totalNum = 62    //一共70个字符减退订回“T”，再减签名左右符号
-        let sign = ''
-        let sign_id = 0
-        let menu = null
         if (user !== null) {
             fontNum = totalNum-this.props.user.sms_sign.length
-            sign = this.props.user.sms_sign
-            sign_id = this.props.user.sign_id
-            menu = this.props.user.sms_menu.menu
         }
         const val = getFieldsValue()
         let smsNum = 0
         if (val.sms) {
             smsNum = val.sms.length
         }
-        const saveData = {
-            sign: sign,
-            sign_id: sign_id,
-            menu: menu
-        }
         return (
             <div className="panel panel-default">
                 <div className="panel-body">
                     <div className="col-md-8">
-                        <Form onSubmit={this.handleSubmit.bind(this, saveData)}>
+                        <Form onSubmit={this.handleSubmit.bind(this)}>
                             <FormItem
                                 label="计划标题"
                                 {...formItemLayout}

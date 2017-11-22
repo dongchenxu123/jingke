@@ -11,6 +11,7 @@ import PlanMain from '../views/plan/planMain'
 import CreateSms from '../views/plan/createSms'
 import SelectPeople from '../views/plan/selectPeople'
 import Finish from '../views/plan/finish'
+import PlanDetail from '../views/plan/planDetail'
 export const routes = [
 	{
 		path: '/',
@@ -62,6 +63,10 @@ export const routes = [
 			{
 				path: '/finish',
 				component: Finish
+			},
+			{
+				path: '/planDetail/:id',
+				component: PlanDetail
 			}
 		]
 	},
