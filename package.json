@@ -20,8 +20,8 @@
     "webpack": "^3.8.1"
   },
   "scripts": {
-    "start": "set NODE_ENV=development&& node server.js",
-    "build": "react-scripts build",
+    "start": "set NODE_ENV=development&&node server.js",
+    "build": "rm -rf ./build && set NODE_ENV=production&&webpack -p --progress --config webpack.config.js",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },

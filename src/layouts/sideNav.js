@@ -16,7 +16,7 @@ class SideNav extends React.Component {
 		if (name === '/customer' || name === '/customerPeople') {
 			defaultValue = ['sub2']
 		}
-		if (name === '/plan') {
+		if (name === '/plan' || name === '/createSms' || name === '/SelectPeople' || name === '/finish') {
 			defaultValue = ['sub3']
 		}
 		if (name === '/templete') {

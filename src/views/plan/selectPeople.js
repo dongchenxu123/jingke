@@ -85,7 +85,7 @@ class SelectPeople extends React.Component {
             tag_ids: tag_ids
         }
         addTask (sendData).then(data => {
-            if (data !== null) {
+            if (data.length > 0) {
                 history.push(finish)
                 this.props.commData({step:2, seltotal: seltotal})
             }

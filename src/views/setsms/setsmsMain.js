@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button, Spin, message} from 'antd'
+import {Button, Spin, message, Alert} from 'antd'
 import SetsmsForm from './setsmsForm'
 import request from '../../util/request'
 import DoneSms from './doneSms'
@@ -16,6 +16,8 @@ const style={
     margin: '20px 0'
   }
 }
+const status={0: '待审核',1: '审核通过',2: '审核拒绝', 3: '已提交,审核中'} 
+const alertType = {0: 'info',1: 'success',2: 'error', 3: 'info'}
 function userInfo(){
     let option={
         url: Obj.userInfo
@@ -64,22 +66,37 @@ class SetsmsMain extends React.Component {
         }
     }
     loadingUserInfo () {
+        // let show = true
         userInfo().then(data => {
-            if (data.user.company_license !== "" && data.user.sms_sign !== "" && data.user.telephone !== "") {
-                this.setState({
-                    showForm: false
-                })
-            }
+            // if (data.user.company_license !== "" && data.user.sms_sign !== "" && data.user.telephone !== "") {
+            //     show = false
+            // }
             this.setState({
                 company_license: data.user.company_license,
                 sms_sign: data.user.sms_sign,
                 telephone: data.user.telephone,
-                loading: false
+                loading: false,
+                showForm: false
             })
         })
     }
     componentDidMount () {
-        this.loadingUserInfo()
+        const user = this.props.user
+        let show = true
+        if (user !== null) {
+            if (user.company_license !== "" && user.sms_sign !== "" && user.telephone !== "") {
+                show = false
+            }
+            this.setState({
+                company_license: user.company_license,
+                sms_sign: user.sms_sign,
+                telephone: user.telephone,
+                loading: false,
+                showForm: show
+            })
+        }
+        
+        // this.loadingUserInfo()
     }
     handleClick = () => {
         this.setState({
@@ -109,6 +126,17 @@ class SetsmsMain extends React.Component {
     }
     renderContent () {
         const {showForm, company_license, sms_sign, telephone} = this.state
+        const user = this.props.user
+        let signStatus = ""
+        if (user !== null) {
+            signStatus = user.sms_menu.status
+        }
+        const content =(
+            <div>
+                <span>短信签名:</span>
+                <span style={{paddingLeft: '8px'}}>{status[signStatus]}</span>
+            </div>
+        ) 
         if (showForm) {
             return (
                 <SetsmsForm company_license={company_license}
@@ -119,10 +147,17 @@ class SetsmsMain extends React.Component {
             )
         } else {
              return (
-                <DoneSms company_license={company_license}
-                         sms_sign={sms_sign}
-                         telephone={telephone}
-                         handleClick={this.handleClick}/>
+                <div>
+                    {
+                        signStatus
+                        ? <Alert message={content} type={alertType[signStatus]} showIcon style={{marginBottom: '20px'}}/>
+                        : null
+                    }
+                    <DoneSms company_license={company_license}
+                            sms_sign={sms_sign}
+                            telephone={telephone}
+                            handleClick={this.handleClick}/>
+                </div>
             )
         }
     }

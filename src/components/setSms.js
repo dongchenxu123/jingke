@@ -3,6 +3,7 @@ import './App.css'
 import SetsmsMain from '../views/setsms/setsmsMain'
 class SetSmsview extends React.Component {
     render () {
+        const user = this.props.data.user
         return (
              <div className="setsms">
                 <div className="panel-heading" style={{backgroundColor: '#fff', marginBottom: '20px', height: '50px'}}>
@@ -11,7 +12,7 @@ class SetSmsview extends React.Component {
                         <span style={{paddingLeft: '20px', color: '#333'}}>如有疑问请联系客服!</span>
                     </h5>
                 </div>
-                <SetsmsMain />
+                <SetsmsMain user={user}/>
             </div>
         )
     }
