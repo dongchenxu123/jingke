@@ -5,6 +5,7 @@ import {
  } from 'react-router-dom'
 import { Menu, Icon } from 'antd'; 
 import {routes} from '../routes/index'
+
 // import HeaderView from './header'
 // import App from '../components/app';
 // import '../styles/theme.css'
@@ -53,12 +54,12 @@ class HomeLayout extends React.Component {
 		}
 	}
 	render() {
-		const {routes, location} = this.props;
-		const pathName = location.pathname
+		const {routes} = this.props;
+		const pathName = window.location.hash.replace('#', '')
 		const RouteWithSubRoutes = (route) => (
 			<Route 
 				exact={route.exact} 
-				path={route.path} 
+				path={route.path}
 				render={props => {
 					return(<route.component {...props} routes={route.routes} data={this.state} commData={this.commData}/>)}
 				}
@@ -71,7 +72,6 @@ class HomeLayout extends React.Component {
 					{routes.map((route, i) => (
                         <RouteWithSubRoutes key={i} {...route}/>
                     ))}	
-					
 				</div>
 			</div>
 		)

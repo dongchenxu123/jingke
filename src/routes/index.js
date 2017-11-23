@@ -1,11 +1,12 @@
 import React from 'react'
 import {
-  HashRouter as Router,
+  Router,
   Route, Link
  } from 'react-router-dom'
 import { Menu, Icon, Button } from 'antd'; 
 import {routes} from './config'
-
+import createHistory from 'history/createHashHistory'
+const history = createHistory()
 const SubMenu = Menu.SubMenu;
 
 //router配置的是二维数组，这里处理的是外层部分
@@ -21,13 +22,13 @@ class RouteConf extends React.Component {
             }}/>
         )
         return (
-                <Router> 
+                <Router basename='/' history={history}> 
                     <span>             
                     {routes.map((route, i) => (
                             <RouteWithSubRoutes key={i} {...route}/>
                         ))}	
 
-                        </span>		
+                    </span>		
                 </Router>
             )
 	}
