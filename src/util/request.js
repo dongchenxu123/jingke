@@ -1,7 +1,7 @@
 import axios from 'axios'
-import {message} from 'antd'
+import {Modal} from 'antd'
 
-const baseXbUrl = 'http://jingke.steven.xibao100.com/';
+const baseXbUrl = '/';
 const devBaseUrl = '/api/';
 
 export default function req(reqData) {
@@ -37,7 +37,12 @@ export default function req(reqData) {
                 }
                 if (res.code) {
                     // reject({msg: res.msg});
-                    message.error(res.msg)
+                    Modal.error({
+                        title: '错误提示',
+                        content: (
+                            <p>{res.msg}</p>
+                        )
+                    });
                     reject(res.msg)
                     return;
                 }
