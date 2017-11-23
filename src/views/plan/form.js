@@ -27,7 +27,7 @@ class FormView extends React.Component {
         }
     }
     disabledDate = (current) => {
-        return current && current.valueOf() < Date.now()
+        return current && current.valueOf() < (new Date().getTime()+(2*3600*1000*24))
     }
     render () {
         const { getFieldDecorator, getFieldsValue } = this.props.form;
@@ -67,7 +67,7 @@ class FormView extends React.Component {
                             <FormItem
                                 {...formItemLayout}
                                 label="发送时间"
-                                help="仅可以选择3日之后的时间，可以精确到“时”"
+                                extra="仅可以选择3日之后的时间，可以精确到“时”"
                                 >
                                 {getFieldDecorator('sendTime', config)(
                                     <DatePicker disabledDate={this.disabledDate}/>

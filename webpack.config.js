@@ -60,7 +60,7 @@ if(isPro) {
    output = {
     filename: '[name].[hash].js',
     path: path.join(__dirname, 'build'),
-    publicPath: 'https://zuanshi.xibao100.com',
+    publicPath: 'https://jingke.xibao100.com',
     chunkFilename: '[name].[hash].js'
   }
 } else {

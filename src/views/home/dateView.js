@@ -33,8 +33,8 @@ class DateView extends React.Component {
                             <span style={{ paddingLeft: '20px', fontSize: '20px'}}>{send}%
                                 {
                                     send < 0
-                                    ? <Icon type="arrow-up" style={{color: '#ff0000', fontSize: '14px'}}/>
-                                    : <Icon type="arrow-up" style={{color: '#6acea5', fontSize: '14px'}}/>
+                                    ? <Icon type="arrow-up" style={{color: '#6acea5', fontSize: '14px'}}/>
+                                    : <Icon type="arrow-up" style={{color: '#ff0000', fontSize: '14px'}}/>
                                 }
                             </span>
                         </p>
@@ -60,8 +60,8 @@ class DateView extends React.Component {
                             <span style={{paddingLeft: '20px', fontSize: '20px'}}>{suc}%
                                 {
                                     suc < 0
-                                    ? <Icon type="arrow-up" style={{color: '#ff0000', fontSize: '14px'}}/>
-                                    : <Icon type="arrow-up" style={{color: '#6acea5', fontSize: '14px'}}/>
+                                    ? <Icon type="arrow-up" style={{color: '#6acea5', fontSize: '14px'}}/>
+                                    : <Icon type="arrow-up" style={{color: '#ff0000', fontSize: '14px'}}/>
                                 }
                             </span>
                         </p>
@@ -87,8 +87,8 @@ class DateView extends React.Component {
                             <span style={{paddingLeft: '20px', fontSize: '20px'}}>{click}%
                                 {
                                     click < 0
-                                    ? <Icon type="arrow-up" style={{color: '#ff0000', fontSize: '14px'}}/>
-                                    : <Icon type="arrow-up" style={{color: '#6acea5', fontSize: '14px'}}/>
+                                    ? <Icon type="arrow-up" style={{color: '#6acea5', fontSize: '14px'}}/>
+                                    : <Icon type="arrow-up" style={{color: '#ff0000', fontSize: '14px'}}/>
                                 }
                             </span>
                         </p>
