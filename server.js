@@ -41,7 +41,7 @@ app.use(devMiddleware);
 
 
 app.use(webpackHotMiddleware(compiler));
-app.use(express.static(path.join(__dirname, 'build')))
+app.use(express.static(path.join(__dirname, 'dist')))
 
 
 app.get('/', function (req, res, next) {
