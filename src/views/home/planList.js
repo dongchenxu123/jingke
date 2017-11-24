@@ -96,16 +96,13 @@ class PlanListView extends React.Component {
           )
         }];
         return (
-            <div className='panel panel-default'>
-                <div className='panel-body'>
-                    <h5 style={{marginBottom: '20px'}}>推动记录</h5>
-                    {
-                      loading
-                      ? <div style={style.spin}><Spin spinning={loading}/></div>
-                      : this.renderTable(tasksList, columns)
-                    }
-                </div>
-            </div>
+          <div>
+            {
+              loading
+              ? <div style={style.spin}><Spin spinning={loading}/></div>
+              : this.renderTable(tasksList, columns)
+            }
+          </div>
         )
     }
 }

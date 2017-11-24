@@ -155,9 +155,14 @@ class PlanMainview extends React.Component {
                         <RangePicker onChange={this.onChangeTime} />
                     </div>
                 </div>
-                <PlanList tasksList={this.state.tasksList}
-                          loading={this.state.loading}
-                          handelCancel={this.handelCancel}/>
+                <div className='panel panel-default'>
+                    <div className='panel-body'>
+                        <h5 style={{marginBottom: '20px'}}>推动记录</h5>
+                        <PlanList tasksList={this.state.tasksList}
+                                loading={this.state.loading}
+                                handelCancel={this.handelCancel}/>
+                    </div>
+                </div>
             </div>
         )
     }

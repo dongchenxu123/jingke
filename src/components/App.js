@@ -74,9 +74,14 @@ class App extends Component {
         <DateView curr_month={curr_month}
                   last_month={last_month}
                   today={today}/>
-        <PlanListView tasksList={this.state.tasksList}
+        <div className='panel panel-default'>
+            <div className='panel-body'>
+                <h5 style={{marginBottom: '20px'}}>近期计划（TOP10）</h5>
+                <PlanListView tasksList={this.state.tasksList}
                       loading={this.state.loading}
                       handelCancel={this.handelCancel}/>
+            </div>
+        </div>
       </div>
     );
   }

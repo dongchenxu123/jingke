@@ -75,6 +75,12 @@ class TempFormView extends React.Component {
             wrapperCol: { span: 14 },
         };
         const values = getFieldsValue()
+        if (values.zhidaName ===  "" ) {
+            values.zhidaName = this.state.zhidaName
+        }
+        if (values.zhidaUrl === "") {
+            values.zhidaUrl = this.state.zhidaUrl
+        }
         if (values.menuName1 === '') {
             values.menuName1 = this.state.menuName1
         }

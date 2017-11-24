@@ -74,7 +74,6 @@ class CustomerList extends React.Component {
         })
     }
     onChange = (e) => {
-        console.log('radio checked', e.target.value);
         this.setState({
          orderValue: e.target.value
         });
@@ -88,27 +87,22 @@ class CustomerList extends React.Component {
         this.setState({
             locationValue: checkedValues
         })
-        console.log('locationValue = ', checkedValues);
     }
     onChangePrice = (checkedValues) => {
         this.setState({
             priceValue: checkedValues
         })
-        console.log('priceValue = ', checkedValues);
     }
     onChangecate = (checkedValues) => {
         this.setState({
             cateValue: checkedValues
         })
-        console.log('cateValue = ', checkedValues);
     }
     onChangegender = (checkedValues) => {
         this.setState({
             genderValue: checkedValues
         })
-        console.log('genderValue = ', checkedValues);
     }
-    
     saveData = () => {
         const {orderValue, locationValue, priceValue, cateValue, genderValue} = this.state
         let selectOrder = []
@@ -131,7 +125,6 @@ class CustomerList extends React.Component {
             loading: true
         })
         searchList(data).then(res =>{
-            console.log(res)
             this.setState({
                 customerData: res.data,
                 loading: false
@@ -152,8 +145,7 @@ class CustomerList extends React.Component {
         }
         const _this = this
         addTag (itemData).then(res =>{
-            console.log(res)
-            if (res === 'OK') {
+            if (res > 0) {
                 message.success('创建成功！')
                 _this.setState({
                     peopoleModal: false

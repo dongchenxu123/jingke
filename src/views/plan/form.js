@@ -3,6 +3,7 @@ import {Form, Input, DatePicker, Button} from 'antd'
 // import {Link} from 'react-router-dom'
 import {SelectPeople} from '../../help/linkUrl'
 import createHistory from 'history/createHashHistory';
+import PreView from '../templete/preView'
 const history = createHistory()
 const FormItem = Form.Item
 const { TextArea } = Input
@@ -41,18 +42,26 @@ class FormView extends React.Component {
         const user = this.props.user
         let fontNum = 70
         const totalNum = 62    //一共70个字符减退订回“T”，再减签名左右符号
+        let menu = null
+        let sign = ""
         if (user !== null) {
-            fontNum = totalNum-this.props.user.sms_sign.length
+            fontNum = totalNum-user.sms_sign.length
+            sign = user.sms_sign
+            if (user.sms_menu !== null) {
+                menu = user.sms_menu.menu
+            }
         }
         const val = getFieldsValue()
         let smsNum = 0
         if (val.sms) {
             smsNum = val.sms.length
         }
+        let temp = val.sms
         return (
             <div className="panel panel-default">
                 <div className="panel-body">
                     <div className="col-md-8">
+                        <h5 style={{marginBottom: '20px'}}>短信内容</h5>
                         <Form onSubmit={this.handleSubmit.bind(this)}>
                             <FormItem
                                 label="计划标题"
@@ -67,7 +76,7 @@ class FormView extends React.Component {
                             <FormItem
                                 {...formItemLayout}
                                 label="发送时间"
-                                extra="仅可以选择3日之后的时间，可以精确到“时”"
+                                extra="仅可以选择3日之后的时间"
                                 >
                                 {getFieldDecorator('sendTime', config)(
                                     <DatePicker disabledDate={this.disabledDate}/>
@@ -99,6 +108,12 @@ class FormView extends React.Component {
                                 </Button>
                             </FormItem>
                         </Form>
+                    </div>
+                    <div className="col-md-4" style={{height: 600}}>
+                        <h5 style={{marginBottom: '20px'}}>效果预览</h5>
+                        <div style={{position: 'absolute', top: 32, right: 20, width: '300px', height: '500px', border: '1px solid #eee'}} className='panel panel-default'>
+                            <PreView menu={menu} sign={sign} temp={temp}/>
+                        </div>
                     </div>
                 </div>
             </div>

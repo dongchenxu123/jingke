@@ -3,9 +3,24 @@ import {Button, Card} from 'antd'
 
 class PreView extends React.Component {
   render () {
-    let menus = this.props.menus
+    let menus = null
+    if (this.props.menus) {
+      menus = this.props.menus   //form填的
+    }
+    let menu = null
+    if (this.props.menu) {
+      menu = this.props.menu  //  user获取
+    }
     let serviceMenu = []
     let zhidaMenu = null
+    let sign = ""
+    let temp = ""
+    if (this.props.sign) {
+      sign = this.props.sign
+    }
+    if (this.props.temp) {
+      temp = this.props.temp
+    }
     if (menus != null) {
         if (menus.zhidaName && menus.zhidaUrl) {
             zhidaMenu = {name: menus.zhidaName, url: menus.zhidaUrl}
@@ -20,6 +35,18 @@ class PreView extends React.Component {
             serviceMenu.push({name: menus.menuName3, url: menus.menuUrl3})
         }
     }
+    if (menu != null) {
+      for (var j = 0; j < menu.length; j++) {
+        if (!menu[j].type) {
+            menu[j].type = 1
+        }
+        if (menu[j].type === 1) {
+            serviceMenu.push(menu[j])
+        } else {
+            zhidaMenu = menu[j]
+        }
+      }
+    }
     return (
      <div>
       <div style={{width: '100%', height: '50px', background: '#5a76d5', lineHeight: '50px', fontSize: '20px', textAlign: 'center', color: '#fff'}}>
@@ -27,9 +54,13 @@ class PreView extends React.Component {
       </div>
       <div className='panel-body'>
         <Card>
-          <span style={{fontSize: '14px'}}>【短信签名】</span>
+          <span style={{fontSize: '14px'}}>{sign ? <span>【{sign}】</span> :<span>【短信签名】</span>}</span>
           <span style={{fontSize: '14px', paddingLeft: '8px'}}>
-              尊敬的用户您好：感谢您************************************
+              {
+                temp
+                ? temp
+                : <span>尊敬的用户您好：感谢您************************************</span>
+              }
           </span>
           <div className='custom-card'>
             {

@@ -76,7 +76,8 @@ class HomeLayout extends React.Component {
 			<div className='home' style={{marginTop: '20px'}}>
 				<div className='container' style={{ display: 'flex' }}>
 					<ZizhiModal company_license={company_license}
-								sms_sign={sms_sign}/>
+								sms_sign={sms_sign}
+								pathName={pathName}/>
 					<SideNav pathName={pathName} sms_balance={this.state.sms_balance}/>
 					{routes.map((route, i) => (
                         <RouteWithSubRoutes key={i} {...route}/>

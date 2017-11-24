@@ -43,12 +43,6 @@ class CusPeoTable extends React.Component {
     }
     render () {
         const loading = this.props.loading
-        const content = (
-          <div>
-            <p>Content</p>
-            <p>Content</p>
-          </div>
-        )
         const columns = [{
           title: '人群名称',
           dataIndex: 'name',

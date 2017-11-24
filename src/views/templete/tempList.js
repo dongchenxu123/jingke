@@ -69,7 +69,7 @@ class TempListView extends React.Component {
                 </div>
                 <div className="panel panel-default">
                     {
-                        menu_status
+                        menu_status && menu !== null
                         ? <Alert message={content} type={alertType[menu_status]} showIcon style={{marginBottom: '20px'}}/>
                         : null
                     }

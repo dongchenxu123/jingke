@@ -77,7 +77,9 @@ class PeopleTable extends React.Component {
         )
       } else {
         return (
-          <div style={{width: '200px', margin: '20px auto'}}>暂无数据</div>
+          <div style={{width: '200px', margin: '20px auto'}}>
+              暂无数据 <Link to='/createPeoTags'>去添加</Link>
+           </div>
         )
       }
     }

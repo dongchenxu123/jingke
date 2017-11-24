@@ -37,11 +37,9 @@ export default function req(reqData) {
                 }
                 if (res.code) {
                     // reject({msg: res.msg});
-                    Modal.error({
-                        title: '错误提示',
-                        content: (
-                            <p>{res.msg}</p>
-                        )
+                 Modal.error({
+                        title: '错误提示：',
+                        content: `${res.msg}`,
                     });
                     reject(res.msg)
                     return;

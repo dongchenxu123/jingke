@@ -1,7 +1,8 @@
 import React from 'react'
 import {Modal, Button, Alert} from 'antd'
-import {Link} from 'react-router-dom'
+
 import createHistory from 'history/createHashHistory';
+import {Link} from 'react-router-dom'
 const history = createHistory()
 
 class ZizhiModal extends React.Component {
@@ -26,7 +27,6 @@ class ZizhiModal extends React.Component {
     })
   }
   handelClick = () => {
-    history.push('/setsms')
     this.setState({
         showModal: false
     })
@@ -42,7 +42,7 @@ class ZizhiModal extends React.Component {
                     >
                     <Alert message="请先上传您的营业执照和设置短信签名…" type="warning" showIcon />
                     <div style={{margin: '20px auto', width: '100px'}}>
-                        <Button type="primary" onClick={this.handelClick}>去上传</Button>
+                        <Link to={'/setsms'}><Button type="primary" onClick={this.handelClick}>去上传</Button></Link>
                     </div>
                 </Modal>
             </div>
