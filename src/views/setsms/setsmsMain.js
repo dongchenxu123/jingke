@@ -129,7 +129,9 @@ class SetsmsMain extends React.Component {
         const user = this.props.user
         let signStatus = ""
         if (user !== null) {
-            signStatus = user.sms_menu.status
+            if (user.sms_menu !== null) {
+                signStatus = user.sms_menu.status
+            }
         }
         const content =(
             <div>

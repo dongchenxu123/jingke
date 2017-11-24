@@ -51,8 +51,10 @@ class TempListView extends React.Component {
         let menu_status = ""
         let menu = null
         if (user !== null) {
-            menu_status = user.sms_menu.menu_status
-            menu = user.sms_menu.menu
+            if (user.sms_menu !== null) {
+                menu_status = user.sms_menu.menu_status
+                menu = user.sms_menu.menu
+            }
         }
         const content =(
             <div>

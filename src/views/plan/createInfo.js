@@ -5,15 +5,17 @@ import {plan, createSms} from '../../help/linkUrl'
 class CreateInfo extends React.Component {
     renderAlert () {
         const {user} = this.props
-        if (user === null) {
-            return
+        if (user !== null) {
+            if (user.sms_menu !== null) {
+                if (user.sms_menu.status === '2') {
+                    return (<Alert message='短信签名审核未通过！' type="error" showIcon />)
+                }
+                if (user.sms_menu.menu_status === '2') {
+                    return (<Alert message='短信模板审核未通过！' type="error" showIcon />)
+                }
+            }
         }
-        if (user.status === '2') {
-            return (<Alert message='短信签名审核未通过！' type="error" showIcon />)
-        }
-        if (user.sms_menu.menu_status === '2') {
-            return (<Alert message='短信模板审核未通过！' type="error" showIcon />)
-        }
+       
     }
     render () {
         const {seltotal} = this.props

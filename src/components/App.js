@@ -51,7 +51,6 @@ class App extends Component {
       })
     })
     getStats().then(data => {
-      console.log(data)
       this.setState({
         curr_month: data.curr_month,
         last_month: data.last_month,

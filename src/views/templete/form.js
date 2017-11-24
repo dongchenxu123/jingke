@@ -1,5 +1,5 @@
 import React from 'react'
-import {Form, Input, Select, Button, Spin} from 'antd'
+import {Form, Input, Select, Button} from 'antd'
 import PreView from './preView'
 
 
@@ -25,8 +25,7 @@ class TempFormView extends React.Component {
             menuName3: '',
             menuUrl1: '',
             menuUrl2: '',
-            menuUrl3: '',
-            showForm: true
+            menuUrl3: ''
         }
     }
     componentDidMount () {
@@ -35,10 +34,7 @@ class TempFormView extends React.Component {
         if (menus !== null) {
             let zhidaMenu = []
             let serviceMenu = []
-            if (menus !== null) {
-                this.setState({
-                    showForm: false
-                })
+            if (menus) {
                 for (var j = 0; j < menus.length; j++) {
                     if (menus[j].type === 1) {
                         serviceMenu.push(menus[j])
@@ -97,15 +93,11 @@ class TempFormView extends React.Component {
         if (values.menuUrl3 === '') {
             values.menuUrl3 = this.state.menuUrl3
         }
-        const showForm = this.state.showForm
         return (
             <div className="panel-body">
                 <div className="col-md-8">
                     <h5 style={{marginBottom: '20px'}}>短信模板</h5>
-                    {
-                        showForm
-                        ? <div style={style.spin}><Spin spinning={showForm}/></div>
-                        : <Form onSubmit={this.handleSubmit}>
+                        <Form onSubmit={this.handleSubmit}>
                             <FormItem
                                 label="直达号"
                                 {...formItemLayout}
@@ -210,20 +202,15 @@ class TempFormView extends React.Component {
                                 <Button type="primary" htmlType="submit">保存</Button>
                                 
                             </FormItem>
-                        </Form>
-                    }
+                     </Form>
                 </div>
-                {
-                    showForm
-                    ? null
-                    : <div className="col-md-4">
+                <div className="col-md-4">
                         <h5 style={{marginBottom: '20px'}}>效果预览</h5>
                         <div style={{position: 'absolute', top: 32, right: 20, width: '300px', height: '500px', border: '1px solid #eee'}} className='panel panel-default'>
                             <PreView menus={values} />
                         </div>
-                     </div>
-                }
-            </div>
+                 </div>
+               </div>
         )
     }
 }
