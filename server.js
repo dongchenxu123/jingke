@@ -17,7 +17,7 @@ const context = '/api';
 
 //options可选的配置参数请自行看readme.md文档，通常只需要配置target，也就是你的api所属的域名。
 const options = {
-  target: 'http://proxy.jingke.xibao100.com:7080',//目标服务器地址
+  target: 'http://proxy.jingke.com:7080',//目标服务器地址
   changeOrigin: true           //虚拟主机网站需要
 }
 

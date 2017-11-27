@@ -8,6 +8,16 @@ function getBase64(img, callback) {
   reader.addEventListener('load', () => callback(reader.result));
   reader.readAsDataURL(img);
 }
+
+let uploadPic = "/user?do=upload"
+
+if (process.env.NODE_ENV === 'development') {
+    // reqData.url = devBaseUrl + url + '&test=1'
+    // console.log('request req data', reqData)
+    uploadPic = `api${uploadPic}`
+}
+
+
 class SetsmsForm extends React.Component {
     constructor () {
         super()
@@ -112,7 +122,7 @@ class SetsmsForm extends React.Component {
                             className="avatar-uploader"
                             name="file"
                             showUploadList={false}
-                            action="/user?do=upload"
+                            action={uploadPic} //
                             onChange={this.handleChange}
                         >
                                {

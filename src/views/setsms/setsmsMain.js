@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import {Button, Spin, message, Alert} from 'antd'
 import SetsmsForm from './setsmsForm'
 import request from '../../util/request'
@@ -118,7 +119,10 @@ class SetsmsMain extends React.Component {
              _this.setState({
                  showForm: false
              })
-             _this.loadingUserInfo()
+            // _this.loadingUserInfo()
+             _this.props.dispatch({
+                type:'user/getUser'
+             })
            } else {
              message.error('创建失败！')
            }
@@ -164,7 +168,7 @@ class SetsmsMain extends React.Component {
         }
     }
     render () {
-        const loading= this.state.loading
+        const {loading } = this.props
         return (
             <div className="panel panel-default">
                 <div className="panel-body">
@@ -178,4 +182,13 @@ class SetsmsMain extends React.Component {
     }
 }
 
-export default SetsmsMain
+function mapToState(state) {
+    const user = state.user
+    return {
+        user: user.user,
+        shop: user.shop,
+        loading: state.loading.effects['user/getUser']
+    }
+}
+
+export default connect(mapToState)(SetsmsMain)

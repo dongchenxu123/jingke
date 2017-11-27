@@ -1,9 +1,10 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import {
   HashRouter as Router,
   Route
  } from 'react-router-dom'
-import { Menu, Icon } from 'antd'; 
+import { Menu, Icon, Spin } from 'antd'; 
 import {routes} from '../routes/index'
 import ZizhiModal from '../components/zizhiModal'
 // import HeaderView from './header'
@@ -36,16 +37,21 @@ class HomeLayout extends React.Component {
 		}
 	}
 	componentDidMount () {
-	    const _this = this
-		getuserInfo ().then(data => {
-			_this.setState({
-				user: data.user,
-				sms_balance: data.user.sms_balance,
-				company_license: data.user.company_license,
-				sms_sign: data.user.sms_sign
-			})
+		// console.log(this.props)
+		// const _this = this;
+		
+		// this.props.dispatch({
+		// 	type:'user/getUser'
+		// })
+		// getuserInfo ().then(data => {
+		// 	_this.setState({
+		// 		user: data.user,
+		// 		sms_balance: data.user.sms_balance,
+		// 		company_license: data.user.company_license,
+		// 		sms_sign: data.user.sms_sign
+		// 	})
 			
-		})
+		// })
 	}
 	commData = (data) => {
 		if (data.step === 1) {
@@ -60,9 +66,11 @@ class HomeLayout extends React.Component {
 		}
 	}
 	render() {
-		const {routes} = this.props;
-		const {company_license, sms_sign} = this.state
+		const {routes, user, shop } = this.props;
+		// const {company_license, sms_sign} = this.state
 		const pathName = window.location.hash.replace('#', '')
+		console.log(user)
+		const {sms_balance, company_license, sms_sign } = user
 		const RouteWithSubRoutes = (route) => (
 			<Route 
 				exact={route.exact} 
@@ -73,20 +81,30 @@ class HomeLayout extends React.Component {
 			/>
 		)
 		return (
-			<div className='home' style={{marginTop: '20px'}}>
-				<div className='container' style={{ display: 'flex' }}>
-					<ZizhiModal company_license={company_license}
-								sms_sign={sms_sign}
-								pathName={pathName}/>
-					<SideNav pathName={pathName} sms_balance={this.state.sms_balance}/>
-					{routes.map((route, i) => (
-                        <RouteWithSubRoutes key={i} {...route}/>
-                    ))}	
+				<div className='home' style={{marginTop: '20px'}} >
+					<div className='container' style={{ display: 'flex' }}>
+						<ZizhiModal company_license={company_license}
+									sms_sign={sms_sign}
+									pathName={pathName}/>
+						
+						<SideNav pathName={pathName} sms_balance={sms_balance}/>
+						
+						{routes.map((route, i) => (
+							<RouteWithSubRoutes key={i} {...route}/>
+						))}	
+					</div>
 				</div>
-			</div>
 		)
 	}
 }
 
+function mapStateToProps(state) {
+	const { user, shop } = state.user;
+	return {
+	  user,
+	  shop,
+	  loading: state.loading.effects['user/getUser']
+	}
+  }
 
-export default HomeLayout
+export default connect(mapStateToProps)(HomeLayout)
