@@ -1,8 +1,8 @@
 {
-  "name": "my-app",
+  "name": "jingke",
   "version": "0.1.0",
   "private": true,
-  "homepage": ".",
+  "homepage": "https://cdn-jingkepc.xibao100.com",
   "dependencies": {
     "dva": "^2.1.0",
     "dva-loading": "^1.0.4",
@@ -12,7 +12,7 @@
     "react-scripts": "1.0.17"
   },
   "scripts": {
-    "build": "react-app-rewired build",
+    "build": "rimraf dist && react-app-rewired build && node copy.js",
     "start": "react-app-rewired start",
     "old-start": "set NODE_ENV=development&&node server.js",
     "old-build": "rm -rf ./dist && set NODE_ENV=production&&webpack -p --progress --config webpack.config.js",
@@ -30,16 +30,12 @@
     }
   },
   "devDependencies": {
-    "antd": "^2.13.9",
+    "antd": "^2.13.10",
     "axios": "^0.17.0",
-    "babel-loader": "^7.1.2",
-    "less": "^2.7.3",
-    "less-loader": "^4.0.5",
+    "babel-plugin-import": "^1.6.2",
+    "copy-dir": "^0.3.0",
     "react-app-rewire-less": "^2.1.0",
     "react-app-rewired": "^1.3.5",
-    "react-router-dom": "^4.2.2"
-  },
-  "theme": {
-    "primary-color": "#1DA57A"
+    "rimraf": "^2.6.2"
   }
 }
