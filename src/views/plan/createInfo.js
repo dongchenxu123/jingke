@@ -1,7 +1,7 @@
 import React from 'react'
 import {Alert, Icon, Button} from 'antd'
 import {Link} from 'react-router-dom'
-import {plan, createSms} from '../../help/linkUrl'
+import {plan} from '../../help/linkUrl'
 class CreateInfo extends React.Component {
     renderAlert () {
         const {user} = this.props
@@ -18,7 +18,7 @@ class CreateInfo extends React.Component {
        
     }
     render () {
-        const {seltotal} = this.props
+        const {seltotal, recreate} = this.props
         return (
             <div className="panel panel-default">
                 <div className="panel-body">
@@ -36,7 +36,7 @@ class CreateInfo extends React.Component {
                         </p>
                         <div>
                             <Link to={plan}><Button type="primary">返回计划列表</Button></Link>
-                            <Link to={createSms} style={{marginLeft: '16px'}}><Button type="primary">再创建一个</Button></Link>
+                            <Button type="primary" onClick={recreate} style={{marginLeft: '16px'}}>再创建一个</Button>
                         </div>
                      </div>
                 </div>

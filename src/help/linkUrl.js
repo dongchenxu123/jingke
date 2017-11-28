@@ -9,3 +9,5 @@ export const plan = '/plan'
 export const createSms = '/createSms'
 export const SelectPeople = '/SelectPeople'
 export const finish = '/finish'
+
+export const planCreate = '/plan/create'

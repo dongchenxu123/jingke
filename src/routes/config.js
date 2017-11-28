@@ -8,9 +8,12 @@ import UserFee from '../views/userfee/userfeeMain'
 import SetsmsView from '../components/setSms'
 import HomeLayout from '../layouts/HomeLayout'
 import PlanMain from '../views/plan/planMain'
-import CreateSms from '../views/plan/createSms'
-import SelectPeople from '../views/plan/selectPeople'
-import Finish from '../views/plan/finish'
+// import CreateSms from '../views/plan/createSms'
+// import SelectPeople from '../views/plan/selectPeople'
+
+import PlanCreate from '../views/plan/plan-create'
+
+// import Finish from '../views/plan/finish'
 import PlanDetail from '../views/plan/planDetail'
 export const routes = [
 	{
@@ -50,20 +53,26 @@ export const routes = [
 			},
 			{
 				path: '/plan',
+				exact: true,
 				component: PlanMain
 			},
 			{
-				path: '/createSms',
-				component: CreateSms
+				path: '/plan/create',
+				exact: true,
+				component: PlanCreate
 			},
-			{
-				path: '/SelectPeople',
-				component: SelectPeople
-			},
-			{
-				path: '/finish',
-				component: Finish
-			},
+			// {
+			// 	path: '/createSms',
+			// 	component: CreateSms
+			// },
+			// {
+			// 	path: '/SelectPeople',
+			// 	component: SelectPeople
+			// },
+			// {
+			// 	path: '/finish',
+			// 	component: Finish
+			// },
 			{
 				path: '/planDetail/:id',
 				component: PlanDetail

@@ -88,7 +88,7 @@ class PlanListView extends React.Component {
           key: 'caozuo',
           render: (text, record) => (
               <div style={{display: 'flex'}}>
-                <Link to={'/planDetail/'+ record.id}><Button>查看详情</Button></Link>
+                <Link to={'/planDetail/'+ record.id} style={{marginRight: '16px'}}>查看详情</Link>
                 <Popconfirm title="您确定取消这个计划吗?" onConfirm={this.confirm.bind(this, record.id)}>
                   <Button>取消计划</Button>
                 </Popconfirm>
