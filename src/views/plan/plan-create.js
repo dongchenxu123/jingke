@@ -28,6 +28,11 @@ class PlanCreate extends React.Component {
             type: 'plan/recreate'
         })
     }
+    gotoList = () => {
+        this.props.dispatch({
+            type: 'plan/gotolist'
+        })
+    }
     getStepComponent() {
         const { step, user, selectTotal } = this.props;
         switch (step) {
@@ -38,7 +43,7 @@ class PlanCreate extends React.Component {
                 return  <PlanPeople setTags={this.setTags}/>
             
             case 2:
-                return  <Finash user={user} total={selectTotal} recreate={this.recreate}/>
+                return  <Finash user={user} total={selectTotal} recreate={this.recreate} gotoList={this.gotoList}/>
        
             default:
                 break;
@@ -46,7 +51,7 @@ class PlanCreate extends React.Component {
     }
     render() {
         const { step } = this.props;
-        console.log('step', step)
+        // console.log('step', step)
         // const component = this.getStepComponent()
         return (
             <div className="createSms">

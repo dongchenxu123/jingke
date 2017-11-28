@@ -1,4 +1,7 @@
 import * as service from '../service/plan-service';
+
+import * as routerRedux from 'react-router-redux'
+
 export default {
     namespace: 'plan',
     state: {
@@ -19,6 +22,14 @@ export default {
         }
     },
     effects: {
+        *gotolist({payload}, { call, put}) {
+            yield put(routerRedux.push({
+                pathname: '/plan'
+            }))
+            yield put({
+                type: 'recreate' 
+            })
+        },
         *createPlan({ payload }, {call, put, select}) {
             const plan = yield select(state => state.plan)
             const loginInfo = yield select(state => state.user)
@@ -33,7 +44,7 @@ export default {
             }
             const res = yield call(service.createPlan, {data: JSON.stringify(formPlan)});
 
-            console.log("createPlan res", res)
+            // console.log("createPlan res", res)
             if(res && res.length > 0) {
                 yield put({
                     type: 'addPlan',

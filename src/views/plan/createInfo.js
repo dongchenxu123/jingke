@@ -18,7 +18,7 @@ class CreateInfo extends React.Component {
        
     }
     render () {
-        const {seltotal, recreate} = this.props
+        const {seltotal, recreate, gotoList} = this.props
         return (
             <div className="panel panel-default">
                 <div className="panel-body">
@@ -35,7 +35,7 @@ class CreateInfo extends React.Component {
                             您的营销计划审核通过后，系统会自动在您的喜宝余额中扣除本次营销费用
                         </p>
                         <div>
-                            <Link to={plan}><Button type="primary">返回计划列表</Button></Link>
+                            <Button type="primary" onClick={gotoList}>返回计划列表</Button>
                             <Button type="primary" onClick={recreate} style={{marginLeft: '16px'}}>再创建一个</Button>
                         </div>
                      </div>
