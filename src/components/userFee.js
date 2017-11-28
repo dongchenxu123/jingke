@@ -3,6 +3,7 @@ import './App.css'
 import { FormateNum } from '../help/formate'
 import FeebtnView from './feeBtn'
 import UserfeeMain from '../views/userfee/userfeeMain'
+
 class UserFee extends React.Component {
     render () {
         const user = this.props.data.user

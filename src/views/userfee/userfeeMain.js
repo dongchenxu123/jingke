@@ -1,7 +1,12 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { Tabs } from 'antd'
 import RecordView from './record'
 import request from '../../util/request'
+import FeebtnView from '../../components/feeBtn'
+
+import { FormateNum } from '../../help/formate'
+
 const TabPane = Tabs.TabPane
 const reqObj = {
     trades: `user?do=get-trades`,
@@ -44,7 +49,25 @@ class UserfeeMain extends React.Component {
         })
     }
     render () {
+        const { user, userLoading } = this.props
+        console.log(user)
+        let sms_balance = 0
+        if (user !== null) {
+            sms_balance = user.sms_balance
+        }
         return (
+            <div className="userfee">
+            <div className="panel-heading" style={{backgroundColor: '#fff', marginBottom: '20px'}}>
+                <h5 style={{display: 'inline-block', padding: '15px 0'}}>短信余额 (条)</h5>
+                <div style={{lineHeight: '30px'}}>
+                    <div style={{display: 'inline-block'}}>
+                        <span style={{fontSize: '32px'}}>{userLoading ? 0 :FormateNum(sms_balance)}</span>
+                    </div>
+                    <div style={{marginRight: '200px', float: 'right'}}>
+                            <FeebtnView />
+                    </div>
+                </div>
+            </div>
             <div className="panel panel-default">
                 <div className="panel-body">
                     <Tabs defaultActiveKey="1">
@@ -57,8 +80,17 @@ class UserfeeMain extends React.Component {
                     </Tabs>
                 </div>
             </div>
+        </div>
+            
         )
     }
 }
 
-export default UserfeeMain
+function mapToState(state){
+    const user = state.user;
+    return { 
+        user: user.user,
+        userLoading: state.loading.effects['user/getUser']
+    }
+}
+export default connect(mapToState)(UserfeeMain)

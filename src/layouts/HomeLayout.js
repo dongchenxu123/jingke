@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import {
-  Route
- } from 'react-router-dom'
+	Route
+} from 'react-router-dom'
 // import { Spin } from 'antd'; 
 // import {routes} from '../routes/index'
 import ZizhiModal from '../components/zizhiModal'
@@ -13,7 +13,7 @@ import SideNav from './sideNav'
 // import request from '../util/request'
 // const reqObj = {
 //     userinfo:  `user?do=get-shop-info`
-    
+
 // }
 // function getuserInfo () {
 //     let option={
@@ -23,9 +23,9 @@ import SideNav from './sideNav'
 // }
 //router配置的是二维数组，这里处理的是内层部分
 class HomeLayout extends React.Component {
-	constructor () {
+	constructor() {
 		super()
-		this.state={
+		this.state = {
 			data: [],
 			user: null,
 			smsData: null,
@@ -35,10 +35,10 @@ class HomeLayout extends React.Component {
 			sms_sign: ''
 		}
 	}
-	componentDidMount () {
+	componentDidMount() {
 		// console.log(this.props)
 		// const _this = this;
-		
+
 		// this.props.dispatch({
 		// 	type:'user/getUser'
 		// })
@@ -49,7 +49,7 @@ class HomeLayout extends React.Component {
 		// 		company_license: data.user.company_license,
 		// 		sms_sign: data.user.sms_sign
 		// 	})
-			
+
 		// })
 	}
 	commData = (data) => {
@@ -65,33 +65,35 @@ class HomeLayout extends React.Component {
 		}
 	}
 	render() {
-		const {routes, user } = this.props;
+		const { routes, user } = this.props;
 		// const {company_license, sms_sign} = this.state
 		const pathName = window.location.hash.replace('#', '')
-		const {sms_balance, company_license, sms_sign } = user
+		const { sms_balance, company_license, sms_sign } = user
 		const RouteWithSubRoutes = (route) => (
-			<Route 
-				exact={route.exact} 
+			<Route
+				exact={route.exact}
 				path={route.path}
 				render={props => {
-					return(<route.component {...props} routes={route.routes} data={this.state} commData={this.commData}/>)}
+					return (<route.component {...props} routes={route.routes} data={this.state} commData={this.commData} />)
+				}
 				}
 			/>
 		)
 		return (
-				<div className='home' style={{marginTop: '20px'}} >
-					<div className='container' style={{ display: 'flex' }}>
-						<ZizhiModal company_license={company_license}
-									sms_sign={sms_sign}
-									pathName={pathName}/>
-						
-						<SideNav pathName={pathName} sms_balance={sms_balance}/>
-						
-						{routes.map((route, i) => (
-							<RouteWithSubRoutes key={i} {...route}/>
-						))}	
-					</div>
+			<div className='container' style={{ display: 'flex', marginTop: '20px' }}>
+				<ZizhiModal 
+					company_license={company_license}
+					sms_sign={sms_sign}
+					pathName={pathName} 
+				/>
+
+				<SideNav pathName={pathName} sms_balance={sms_balance} />
+				<div style={{marginLeft: '16px', width: '100%'}}>
+					{routes.map((route, i) => (
+						<RouteWithSubRoutes key={i} {...route} />
+					))}
 				</div>
+			</div>
 		)
 	}
 }
@@ -99,10 +101,10 @@ class HomeLayout extends React.Component {
 function mapStateToProps(state) {
 	const { user, shop } = state.user;
 	return {
-	  user,
-	  shop,
-	  loading: state.loading.effects['user/getUser']
+		user,
+		shop,
+		loading: state.loading.effects['user/getUser']
 	}
-  }
+}
 
 export default connect(mapStateToProps)(HomeLayout)

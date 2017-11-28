@@ -70,7 +70,7 @@ class App extends Component {
   render() {
     const {curr_month, last_month, today} = this.state
     return (
-      <div className="App">
+      <div>
         <DateView curr_month={curr_month}
                   last_month={last_month}
                   today={today}/>
