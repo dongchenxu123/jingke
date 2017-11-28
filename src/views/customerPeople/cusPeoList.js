@@ -48,7 +48,7 @@ class CusPeoList extends React.Component {
     }
     delTag = (id) => {
         delTag(id).then(data => {
-            console.log(data)
+            // console.log(data)
             if (data === "OK") {
                  this.loadTagsList()
             }

@@ -69,7 +69,6 @@ class HomeLayout extends React.Component {
 		const {routes, user, shop } = this.props;
 		// const {company_license, sms_sign} = this.state
 		const pathName = window.location.hash.replace('#', '')
-		console.log(user)
 		const {sms_balance, company_license, sms_sign } = user
 		const RouteWithSubRoutes = (route) => (
 			<Route 

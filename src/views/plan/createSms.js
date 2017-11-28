@@ -6,7 +6,7 @@ import FormView from './form'
 import {formatDateTime} from '../../help/formate'
 class CreateSms extends React.Component {
     SubmitForm = (values) => {
-        console.log(values)
+        // console.log(values)
         const data = {
             plan_name: values.planTitle,
             send_time: formatDateTime(new Date(values.sendTime)),

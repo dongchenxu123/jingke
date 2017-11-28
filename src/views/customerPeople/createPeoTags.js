@@ -30,7 +30,6 @@ function addTag (values) {
 class CreatePeoTags extends React.Component {
     onSubmit = (values) => {
       addTag(values).then(data => {
-        console.log(data)
         if (data !== null) {
             message.success(`创建成功！`)
         } else {

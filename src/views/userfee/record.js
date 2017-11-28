@@ -12,7 +12,7 @@ const style={
 }
 class RecordView extends React.Component {
     onChange = (date, dateString) => {
-        console.log(date, dateString);
+        // console.log(date, dateString);
     }
     renderTable = (columns) => {
        const data = this.props.data

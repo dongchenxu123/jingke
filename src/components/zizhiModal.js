@@ -1,4 +1,6 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import * as routerRedux from 'react-router-redux'
 import {Modal, Button, Alert} from 'antd'
 
 import createHistory from 'history/createHashHistory';
@@ -27,9 +29,12 @@ class ZizhiModal extends React.Component {
     })
   }*/
   handelClick = () => {
-    this.setState({
-        showModal: false
-    })
+    // this.setState({
+    //     showModal: false
+    // })
+    this.props.dispatch(routerRedux.push({
+        pathname: '/setsms'
+    }))
   }
   render () {
         const { company_license, pathName } = this.props;
@@ -40,7 +45,7 @@ class ZizhiModal extends React.Component {
         if (pathName === '/setsms') {
             hasLicense = true;
         }
-        console.log(this.props)
+        // console.log(this.props)
        return (
             <Modal
                 title="系统提示"
@@ -50,11 +55,12 @@ class ZizhiModal extends React.Component {
                 >
                 <Alert message="请先上传您的营业执照和设置短信签名…" type="warning" showIcon />
                 <div style={{margin: '20px auto', width: '100px'}}>
-                    <Link to={'/setsms'}><Button type="primary" onClick={this.handelClick}>去上传</Button></Link>
+                    <Button type="primary" onClick={this.handelClick}>去上传</Button>
                 </div>
             </Modal>
         )
     }
 }
 
-export default ZizhiModal
+export default connect()(ZizhiModal)
+/*<Link to={'/setsms'}></Link>*/

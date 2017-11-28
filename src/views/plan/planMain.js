@@ -96,7 +96,7 @@ class PlanMainview extends React.Component {
         })
     }
     onChangeTime = (date, dateString) => {
-      console.log(date, dateString)
+    //   console.log(date, dateString)
       const _this = this
       const {planName, task_status} = this.state
       if (dateString.length > 0) {

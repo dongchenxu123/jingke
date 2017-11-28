@@ -5,7 +5,7 @@ import StepView from './step'
 import CreateInfo from './createInfo'
 class FinishView extends React.Component {
     render () {
-        console.log(this.props.data)
+        // console.log(this.props.data)
         const {user, seltotal} = this.props.data
         return (
             <div className="finish">
