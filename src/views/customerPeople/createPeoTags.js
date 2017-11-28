@@ -3,8 +3,8 @@ import { Alert, Tabs, message } from 'antd'
 import CustomerList from '../customer/customerList'
 import FormTxtView from './formTxt'
 import request from '../../util/request'
-const TabPane = Tabs.TabPane;
 import '../../components/App.css'
+const TabPane = Tabs.TabPane;
 const Obj = {
     createTag: `customer?do=add-tag`
 }

@@ -14,7 +14,7 @@ export default function req(reqData) {
         if (process.env.NODE_ENV === 'production') {
             reqData.url = baseXbUrl + url
         }
-        axios(reqData).then(response => {
+        return axios(reqData).then(response => {
             if (process.env.NODE_ENV === 'development') {
                 console.log('request response', response)
             }

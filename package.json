@@ -4,50 +4,40 @@
   "private": true,
   "homepage": ".",
   "dependencies": {
-    "babel-plugin-import": "^1.6.2",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-0": "^6.24.1",
     "dva": "^2.1.0",
     "dva-loading": "^1.0.4",
-    "path": "^0.12.7",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-redux": "^5.0.6",
-    "react-scripts": "1.0.17",
-    "redux": "^3.7.2",
-    "redux-actions": "^2.2.1",
-    "redux-devtools-dock-monitor": "^1.1.2",
-    "redux-devtools-log-monitor": "^1.3.0",
-    "webpack": "^3.8.1"
+    "react-scripts": "1.0.17"
   },
   "scripts": {
-    "start": "set NODE_ENV=development&&node server.js",
-    "build": "rm -rf ./dist && set NODE_ENV=production&&webpack -p --progress --config webpack.config.js",
+    "build": "react-app-rewired build",
+    "start": "react-app-rewired start",
+    "old-start": "set NODE_ENV=development&&node server.js",
+    "old-build": "rm -rf ./dist && set NODE_ENV=production&&webpack -p --progress --config webpack.config.js",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
+  "proxy": {
+    "/api": {
+      "target": "http://proxy.jingke.com:7080",
+      "ws": true,
+      "router": {
+        "dev.jingke.xibao100.com:3336": "http://proxy.jingke.com:7080"
+      },
+      "changeOrigin": true
+    }
+  },
   "devDependencies": {
     "antd": "^2.13.9",
-    "autoprefixer": "^7.1.6",
     "axios": "^0.17.0",
     "babel-loader": "^7.1.2",
-    "babel-polyfill": "^6.26.0",
-    "css-loader": "^0.28.7",
-    "express": "^4.16.2",
-    "file-loader": "^1.1.5",
-    "html-webpack-plugin": "^2.30.1",
-    "http-proxy-middleware": "^0.17.4",
     "less": "^2.7.3",
     "less-loader": "^4.0.5",
-    "postcss-loader": "^2.0.8",
-    "react-router-dom": "^4.2.2",
-    "redux-devtools": "^3.4.0",
-    "redux-thunk": "^2.2.0",
-    "style-loader": "^0.19.0",
-    "url-loader": "^0.6.2",
-    "webpack-dev-middleware": "^1.12.0",
-    "webpack-hot-middleware": "^2.20.0"
+    "react-app-rewire-less": "^2.1.0",
+    "react-app-rewired": "^1.3.5",
+    "react-router-dom": "^4.2.2"
   },
   "theme": {
     "primary-color": "#1DA57A"

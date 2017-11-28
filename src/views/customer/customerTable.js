@@ -66,7 +66,7 @@ class CustomerTable extends React.Component {
       }
     }
     render () {
-        const customerData = this.props.customerData
+       // const customerData = this.props.customerData
         const loading = this.props.loading
         return (
             <div>

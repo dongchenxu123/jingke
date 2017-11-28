@@ -1,5 +1,5 @@
 
-import JdHomeView from '../components/app';
+import JdHomeView from '../components/App';
 import CustomerView from '../components/customer'
 import CustomerPeople from '../components/customerPeople'
 import CreatePeoTags from '../views/customerPeople/createPeoTags'

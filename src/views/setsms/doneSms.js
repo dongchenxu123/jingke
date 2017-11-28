@@ -11,7 +11,9 @@ class DoneSms extends React.Component {
                 </div>
                 <div className="panel-heading" style={{padding: '20px 15px'}}>
                     <span>营业执照</span>
-                    <img style={{marginLeft: '15px', width: '150px', height: '150px'}} src={company_license}/>
+                    <img 
+                    style={{marginLeft: '15px', width: '150px', height: '150px'}} 
+                    src={company_license} alt=''/>
                 </div>
                 <div className="panel-heading" style={{padding: '20px 15px'}}>
                     <span>手机号</span>

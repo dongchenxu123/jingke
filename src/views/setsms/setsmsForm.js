@@ -86,7 +86,7 @@ class SetsmsForm extends React.Component {
     }
   }
     render () {
-        const { getFieldDecorator, getFieldsValue } = this.props.form;
+        const { getFieldDecorator } = this.props.form;
         const formItemLayout = {
              labelCol:{span: 4 },
              wrapperCol:{ span: 8 }

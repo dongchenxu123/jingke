@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, Popover, Button, Spin, Popconfirm } from 'antd'
+import { Table, Button, Spin, Popconfirm } from 'antd'
 import {FormateNum} from '../../help/formate'
 const style={
   spin: {

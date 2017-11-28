@@ -1,5 +1,4 @@
 import  * as service from '../service/userService';
-console.log(service)
 export default {
   namespace: 'user',
   state:{

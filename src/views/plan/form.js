@@ -20,7 +20,7 @@ class FormView extends React.Component {
         });
     }
     checkSms (fontNum, rule, value, callback) {
-        const form = this.props.form;
+        // const form = this.props.form;
         if (value && value.length > fontNum) {
         callback('字符已经超出规定范围!');
         } else {

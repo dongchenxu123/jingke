@@ -3,9 +3,9 @@ import { connect } from 'react-redux'
 import * as routerRedux from 'react-router-redux'
 import {Modal, Button, Alert} from 'antd'
 
-import createHistory from 'history/createHashHistory';
-import {Link} from 'react-router-dom'
-const history = createHistory()
+// import createHistory from 'history/createHashHistory';
+// import {Link} from 'react-router-dom'
+// const history = createHistory()
 
 class ZizhiModal extends React.Component {
   constructor () {

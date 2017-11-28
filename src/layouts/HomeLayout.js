@@ -1,27 +1,26 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import {
-  HashRouter as Router,
   Route
  } from 'react-router-dom'
-import { Menu, Icon, Spin } from 'antd'; 
-import {routes} from '../routes/index'
+// import { Spin } from 'antd'; 
+// import {routes} from '../routes/index'
 import ZizhiModal from '../components/zizhiModal'
 // import HeaderView from './header'
 // import App from '../components/app';
 // import '../styles/theme.css'
 import SideNav from './sideNav'
-import request from '../util/request'
-const reqObj = {
-    userinfo:  `user?do=get-shop-info`
+// import request from '../util/request'
+// const reqObj = {
+//     userinfo:  `user?do=get-shop-info`
     
-}
-function getuserInfo () {
-    let option={
-        url: reqObj.userinfo
-    }
-    return request(option)
-}
+// }
+// function getuserInfo () {
+//     let option={
+//         url: reqObj.userinfo
+//     }
+//     return request(option)
+// }
 //router配置的是二维数组，这里处理的是内层部分
 class HomeLayout extends React.Component {
 	constructor () {
@@ -66,7 +65,7 @@ class HomeLayout extends React.Component {
 		}
 	}
 	render() {
-		const {routes, user, shop } = this.props;
+		const {routes, user } = this.props;
 		// const {company_license, sms_sign} = this.state
 		const pathName = window.location.hash.replace('#', '')
 		const {sms_balance, company_license, sms_sign } = user

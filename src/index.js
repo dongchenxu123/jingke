@@ -42,9 +42,8 @@ function startApp(data){
 	app.start('#root')
 }
 function getPrefix(){
-
 	getUser().then(data => {
-		console.log(data)
+		// console.log(data)
 		if('user' in data) {
 			startApp(data)
 		}

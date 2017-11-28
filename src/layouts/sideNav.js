@@ -34,7 +34,9 @@ const sideNav = ({ pathName, sms_balance }) => {
 		<div style={{ display: 'flex', flexDirection: 'column' }}>
 			<div style={{ padding: '40px 15px 20px 15px', backgroundColor: '#fff', marginBottom: '8px' }}>
 				<p style={{ margin: '10px 0' }}>
-					<img src="https://img10.360buyimg.com/imgzone/jfs/t12295/5/989860713/11710/c715e246/5a17ffbbNe0679e46.jpg" style={{ width: '170px' }} />
+					<img 
+					alt=''
+					src="https://img10.360buyimg.com/imgzone/jfs/t12295/5/989860713/11710/c715e246/5a17ffbbNe0679e46.jpg" style={{ width: '170px' }} />
 				</p>
 				<p style={{ paddingBottom: '15px' }}>短信余额 (条)</p>
 				<p style={{ paddingBottom: '20px' }}>

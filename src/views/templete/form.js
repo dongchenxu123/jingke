@@ -5,14 +5,7 @@ import PreView from './preView'
 
 const FormItem = Form.Item;
 const Option = Select.Option;
-const style={
-  spin: {
-    textAlign: 'center',
-    marginBottom: '20px',
-    padding:'30px 50px',
-    margin: '20px 0'
-  }
-}
+
 class TempFormView extends React.Component {
     constructor () {
         super ()
@@ -29,7 +22,6 @@ class TempFormView extends React.Component {
         }
     }
     componentDidMount () {
-        const _this = this
         const menus = this.props.menu
         if (menus !== null) {
             let zhidaMenu = []

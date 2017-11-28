@@ -106,7 +106,7 @@ class CustomerList extends React.Component {
     saveData = () => {
         const {orderValue, locationValue, priceValue, cateValue, genderValue} = this.state
         let selectOrder = []
-        if (orderValue != '') {
+        if (orderValue !== '') {
              selectOrder.push(orderValue)
         }
         let data={

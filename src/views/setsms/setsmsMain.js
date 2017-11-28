@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import {Button, Spin, message, Alert} from 'antd'
+import { Spin, message, Alert} from 'antd'
 import SetsmsForm from './setsmsForm'
 import request from '../../util/request'
 import DoneSms from './doneSms'

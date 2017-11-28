@@ -55,7 +55,7 @@ class PlanDetail extends React.Component {
         })
     }
     render () {
-        const {detailData, task_status, req_total_num, rpt_succ_num, rpt_click_num,
+        const {task_status, req_total_num, rpt_succ_num, rpt_click_num,
           plan_name, template, menu, created, tags} = this.state
         return (
             <div className="detail">

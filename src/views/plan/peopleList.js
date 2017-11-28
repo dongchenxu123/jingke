@@ -1,7 +1,7 @@
 import React from 'react'
 import {Table, Button, Spin, Alert} from 'antd'
 import {Link} from 'react-router-dom'
-import {finish} from '../../help/linkUrl'
+// import {finish} from '../../help/linkUrl'
 import {FormateNum} from '../../help/formate'
 const style={
   spin: {

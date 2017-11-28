@@ -1,6 +1,7 @@
 /**
  * Created by CY on 2016/1/30.
  */
+/* eslint-disable */ 
 export function FormateNum (s, prefix) {
   if (prefix === undefined) {
     prefix = ''

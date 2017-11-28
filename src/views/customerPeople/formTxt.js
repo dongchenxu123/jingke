@@ -19,7 +19,7 @@ class FormTxtView extends React.Component {
       });
     }
     render () {
-        const { getFieldDecorator, getFieldsValue } = this.props.form;
+        const { getFieldDecorator } = this.props.form;
         const formItemLayout = {
         labelCol: { span: 6 },
         wrapperCol: { span: 14 },
@@ -54,7 +54,7 @@ class FormTxtView extends React.Component {
                 }
             },
         };
-        const formValues = getFieldsValue()
+        // const formValues = getFieldsValue()
         let sendTotal = this.state.total
         return (
             <Form onSubmit={this.handleSubmit}>

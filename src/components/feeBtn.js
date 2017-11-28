@@ -10,6 +10,8 @@ function userRecharge(){
     }
     return request(option)
 }
+const location = window.location;
+
 class FeebtnView extends React.Component {
     linktoRecharge = () => {
         userRecharge().then(data => {
