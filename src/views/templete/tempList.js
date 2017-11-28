@@ -42,14 +42,18 @@ function userRecharge(values) {
 
 class TempListView extends React.Component {
     submitMenu = (values) => {
-        const self = this
-        console.log(self)
+        const self = this;
+        const sms_menu = self.props.user.sms_menu || {}
+        let isHave = '创建成功!'
+        if ('id' in sms_menu) {
+            isHave = '修改成功!'
+        }
         userRecharge(values).then(data => {
             if (data === "OK") {
+                message.success(isHave)
                 self.props.dispatch({
                     type:'user/getUser'
                 })
-                message.success('创建成功!')
             }
         })
     }
@@ -83,7 +87,8 @@ class TempListView extends React.Component {
                             ? <Alert message={content} type={alertType[menu_status]} showIcon style={{ marginBottom: '20px' }} />
                             : null
                     }
-                    <FormView submitMenu={this.submitMenu}
+                    <FormView 
+                        submitMenu={this.submitMenu}
                         menu={menu}
                     />
                 </div>
