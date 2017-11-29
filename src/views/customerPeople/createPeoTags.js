@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { Alert, Tabs, message } from 'antd'
 import CustomerList from '../customer/customerList'
 import FormTxtView from './formTxt'
@@ -29,12 +30,17 @@ function addTag (values) {
 }
 class CreatePeoTags extends React.Component {
     onSubmit = (values) => {
+    
       addTag(values).then(data => {
         if (data !== null) {
             message.success(`创建成功！`)
+            this.props.dispatch({
+                type: 'peopleTag/gotolist'
+            })
         } else {
             message.error(`上传文件内容为空或者格式不正确`)
         }
+
       })
     }
     render () {
@@ -60,4 +66,4 @@ class CreatePeoTags extends React.Component {
     }
 }
 
-export default CreatePeoTags
+export default connect()(CreatePeoTags)

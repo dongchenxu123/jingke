@@ -188,7 +188,7 @@ class CustomerList extends React.Component {
                                         : null
                                     }
                                 </Panel>
-                                <Panel header='客单价' key="3">
+                                <Panel header='购买力' key="3">
                                     {
                                         price.values && price.values.length > 0
                                         ? <CheckboxGroup options={price.values} onChange={this.onChangePrice} />
@@ -224,10 +224,11 @@ class CustomerList extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <PeopleModal visible={this.state.peopoleModal}
-                                savePeople={this.savePeople}
-                                onCancel={this.handleCancel}
-                                />
+                    <PeopleModal 
+                        visible={this.state.peopoleModal}
+                        savePeople={this.savePeople}
+                        onCancel={this.handleCancel}
+                    />
                 </div>
                 <div className="panel panel-default">
                     <div className="panel-body">

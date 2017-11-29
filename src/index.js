@@ -39,6 +39,7 @@ function startApp(data){
 	app.use(createLoading())
 	app.model(require('./models/user').default);
 	app.model(require('./models/plan').default);
+	app.model(require('./models/people-tag').default);
 
 	app.router(require('./routes/index').default);
 	app.start('#root')

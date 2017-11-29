@@ -1,10 +1,10 @@
 import React from 'react'
 import { Table, Spin, Icon, Tooltip } from 'antd'
-const style={
+const style = {
   spin: {
     textAlign: 'center',
     marginBottom: '20px',
-    padding:'30px 50px',
+    padding: '30px 50px',
     margin: '20px 0'
   }
 }
@@ -15,25 +15,24 @@ const columns = [{
   dataIndex: 'fullname',
   key: 'fullname'
 }, {
-  title: 
-      <div>
-        <span>购买力</span>&nbsp;&nbsp;
+  title:
+    <div>
+      <span>购买力</span>&nbsp;&nbsp;
         <Tooltip placement="bottom" title={text}>
-          <Icon type="question-circle-o" />
-        </Tooltip>
-      </div>
+        <Icon type="question-circle-o" />
+      </Tooltip>
+    </div>
   ,
   dataIndex: 'order_price',
   key: 'order_price'
-  
 }, {
   title:
-      <div>
-        <span>活跃度</span>&nbsp;&nbsp;
+    <div>
+      <span>活跃度</span>&nbsp;&nbsp;
         <Tooltip placement="bottom" title={hyText}>
-          <Icon type="question-circle-o" />
-        </Tooltip>
-      </div>
+        <Icon type="question-circle-o" />
+      </Tooltip>
+    </div>
   ,
   dataIndex: 'order_cnt',
   key: 'order_cnt',
@@ -42,7 +41,7 @@ const columns = [{
   key: 'action',
   render: (text, record) => (
     <span>
-       {record.gendar=== "2" ? '女' : '男'}
+      {record.gendar === "2" ? '女' : '男'}
     </span>
   ),
 }, {
@@ -53,31 +52,31 @@ const columns = [{
 
 
 class CustomerTable extends React.Component {
-    renderTable = () => {
-      const customerData = this.props.customerData
-      if (customerData.length > 0) {
-        return (
-          <Table columns={columns} dataSource={customerData} rowKey={record => record.jd_user_id}/>
-        )
-      } else {
-        return (
-          <div style={{width: '200px', margin: '20px auto'}}>暂无数据</div>
-        )
-      }
+  renderTable = () => {
+    const customerData = this.props.customerData
+    if (customerData.length > 0) {
+      return (
+        <Table columns={columns} dataSource={customerData} rowKey={record => `${record.jd_user_id}_${record.mobile}` } />
+      )
+    } else {
+      return (
+        <div style={{ width: '200px', margin: '20px auto' }}>暂无数据</div>
+      )
     }
-    render () {
-       // const customerData = this.props.customerData
-        const loading = this.props.loading
-        return (
-            <div>
-              {
-                loading
-                ? <div style={style.spin}><Spin spinning={loading}/></div>
-                : this.renderTable()
-              }
-            </div>
-        )
-    }
+  }
+  render() {
+    // const customerData = this.props.customerData
+    const loading = this.props.loading
+    return (
+      <div>
+        {
+          loading
+            ? <div style={style.spin}><Spin spinning={loading} /></div>
+            : this.renderTable()
+        }
+      </div>
+    )
+  }
 }
 
 export default CustomerTable

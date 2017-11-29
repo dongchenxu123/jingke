@@ -1,7 +1,15 @@
 import React from 'react'
 import {Form, Upload, Icon, Button, message, Input, Modal} from 'antd'
 
+let uploadUrl = '/customer?do=upload'
+
+if (process.env.NODE_ENV === 'development') {
+    // reqData.url = devBaseUrl + url + '&test=1'
+    // console.log('request req data', reqData)
+    uploadUrl = `api${uploadUrl}`
+}
 const FormItem = Form.Item
+
 class FormTxtView extends React.Component {
     constructor () {
         super()
@@ -27,7 +35,7 @@ class FormTxtView extends React.Component {
         const _this = this
         const props = {
             name: 'file',
-            action: '/customer?do=upload',
+            action: uploadUrl,
             // action: '/api/customer?do=upload&test=1',
             headers: {
                 authorization: 'authorization-text',

@@ -1,4 +1,5 @@
 import React from 'react'
+import {connect } from 'react-redux'
 import '../../components/App.css'
 import PlanList from '../home/planList'
 import PlanData from './planData'
@@ -66,6 +67,10 @@ class PlanMainview extends React.Component {
      cancelPlan(id).then(data => {
        if(data !== null) {
         message.success('取消成功！')
+        this.props.dispatch({
+            type: 'user/getUser',
+            payload: {}
+        })
        } else {
         message.error('计划不存在或已不能取消!')
        }
@@ -168,4 +173,4 @@ class PlanMainview extends React.Component {
     }
 }
 
-export default PlanMainview
+export default connect()(PlanMainview)

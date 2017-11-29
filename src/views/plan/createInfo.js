@@ -1,7 +1,7 @@
 import React from 'react'
 import {Alert, Icon, Button} from 'antd'
-import {Link} from 'react-router-dom'
-import {plan} from '../../help/linkUrl'
+// import {Link} from 'react-router-dom'
+// import {plan} from '../../help/linkUrl'
 class CreateInfo extends React.Component {
     renderAlert () {
         const {user} = this.props

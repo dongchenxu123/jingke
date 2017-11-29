@@ -1,9 +1,15 @@
 import React from 'react'
+import moment from 'moment';
+
+import 'moment/locale/zh-cn';
 import { Form, Input, DatePicker, Button } from 'antd'
+import PreView from '../templete/preView'
+
+moment.locale('zh-cn');
+
 // import {Link} from 'react-router-dom'
 // import { SelectPeople } from '../../help/linkUrl'
 // import createHistory from 'history/createHashHistory';
-import PreView from '../templete/preView'
 // const history = createHistory()
 const FormItem = Form.Item
 const { TextArea } = Input
@@ -79,7 +85,11 @@ class FormView extends React.Component {
                                 extra="仅可以选择3日之后的时间"
                             >
                                 {getFieldDecorator('sendTime', config)(
-                                    <DatePicker disabledDate={this.disabledDate} />
+                                    <DatePicker 
+                                        disabledDate={this.disabledDate}
+                                        format="YYYY-MM-DD HH:mm:ss" 
+                                        showTime={true} 
+                                    />
                                 )}
                             </FormItem>
                             <FormItem
